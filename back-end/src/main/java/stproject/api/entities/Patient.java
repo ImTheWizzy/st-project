@@ -1,14 +1,11 @@
 package stproject.api.entities;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "patient")
 public class Patient {
 
-    @javax.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,28 +31,22 @@ public class Patient {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "gender_id")
-    private int gender_id;
-
     @Column(name = "additional_info")
     private String additionalInfo;
 
-    @Column(name = "doctor_id")
-    private int doctorId;
-
     @ManyToOne
-    @JoinColumn(name="gender_id", nullable=false)
+    @JoinColumn(name="gender_id")
     private Gender gender;
 
     @ManyToOne
-    @JoinColumn(name="doctor_id", nullable=false)
+    @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
     public Patient(){
 
     }
 
-    public Patient(Long id, String firstName, String lastName, String egn, String address, String phone, String birthDate, int age, int gender_id, String additionalInfo, int doctorId, Gender gender, Doctor doctor) {
+    public Patient(Long id, String firstName, String lastName, String egn, String address, String phone, String birthDate, int age, String additionalInfo, Gender gender, Doctor doctor) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,9 +55,7 @@ public class Patient {
         this.phone = phone;
         this.birthDate = birthDate;
         this.age = age;
-        this.gender_id = gender_id;
         this.additionalInfo = additionalInfo;
-        this.doctorId = doctorId;
         this.gender = gender;
         this.doctor = doctor;
     }
@@ -135,14 +124,6 @@ public class Patient {
         this.age = age;
     }
 
-    public int getGender_id() {
-        return gender_id;
-    }
-
-    public void setGender_id(int gender_id) {
-        this.gender_id = gender_id;
-    }
-
     public String getAdditionalInfo() {
         return additionalInfo;
     }
@@ -151,12 +132,19 @@ public class Patient {
         this.additionalInfo = additionalInfo;
     }
 
-    public int getDoctorId() {
-        return doctorId;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 }

@@ -1,20 +1,15 @@
 package stproject.api.entities;
 
-import antlr.StringUtils;
-
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "prescription")
-public class Prescription {
+@Table(name = "medical_referral")
+
+public class MedicalReferral {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "medicine")
-    private String medicine;
 
     @Column(name = "comment")
     private String comment;
@@ -22,8 +17,12 @@ public class Prescription {
     @Column(name = "date")
     private String date;
 
-    @Column(name = "unique_prescription_number")
+    @Column(name = "unique_referral_number")
     private String uniquePrescriptionNumber;
+
+    @ManyToOne
+    @JoinColumn(name="doctors_specialists_id")
+    private DoctorsSpecialists doctorSpecialist;
 
     @ManyToOne
     @JoinColumn(name="doctor_id")
@@ -33,16 +32,15 @@ public class Prescription {
     @JoinColumn(name="patient_id")
     private Patient patient;
 
-    public Prescription(){
-
+    public MedicalReferral() {
     }
 
-    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, Patient patient) {
+    public MedicalReferral(Long id, String comment, String date, String uniquePrescriptionNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, Patient patient) {
         this.id = id;
-        this.medicine = medicine;
         this.comment = comment;
         this.date = date;
         this.uniquePrescriptionNumber = uniquePrescriptionNumber;
+        this.doctorSpecialist = doctorSpecialist;
         this.doctor = doctor;
         this.patient = patient;
     }
@@ -53,14 +51,6 @@ public class Prescription {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getMedicine() {
-        return medicine;
-    }
-
-    public void setMedicine(String medicine) {
-        this.medicine = medicine;
     }
 
     public String getComment() {
@@ -85,6 +75,14 @@ public class Prescription {
 
     public void setUniquePrescriptionNumber(String uniquePrescriptionNumber) {
         this.uniquePrescriptionNumber = uniquePrescriptionNumber;
+    }
+
+    public DoctorsSpecialists getDoctorSpecialist() {
+        return doctorSpecialist;
+    }
+
+    public void setDoctorSpecialist(DoctorsSpecialists doctorSpecialist) {
+        this.doctorSpecialist = doctorSpecialist;
     }
 
     public Doctor getDoctor() {

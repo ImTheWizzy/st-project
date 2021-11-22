@@ -1,7 +1,5 @@
 package stproject.api.entities;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +9,6 @@ import java.util.Set;
 
 public class Gender {
 
-    @javax.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,17 +16,13 @@ public class Gender {
     @Column(name = "gender_type")
     private String genderType;
 
-    @OneToMany(mappedBy = "gender")
-    private Set<Patient> patientSet=new HashSet<>();
-
     public Gender() {
 
     }
 
-    public Gender(Long id, String genderType, Set<Patient> patientSet) {
+    public Gender(Long id, String genderType) {
         this.id = id;
         this.genderType = genderType;
-        this.patientSet = patientSet;
     }
 
     public Long getId() {
