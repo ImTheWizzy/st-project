@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface PatientRepository extends JpaRepository<Patient,Long> {
 
-    @Query("SELECT p FROM Patient p WHERE lower(p.firstName)= :firstName")
-    Optional<Patient> findPatientByFirstName(String firstName);
+   @Query("SELECT p FROM Patient p WHERE lower(p.firstName)= :firstName")
+   Optional<Patient> findPatientByFirstName(String firstName);
 }

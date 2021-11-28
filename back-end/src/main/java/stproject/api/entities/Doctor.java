@@ -1,7 +1,6 @@
 package stproject.api.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import javax.print.Doc;
@@ -12,7 +11,6 @@ import java.util.Set;
 @Table(name = "doctor")
 public class Doctor {
 
-    @javax.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,23 +30,17 @@ public class Doctor {
     @Column(name = "unique_doctor_number")
     private String uniqueDoctorNumber;
 
-    @OneToMany(mappedBy = "doctor")
-    @JsonIgnore
-    private Set<Patient> patientSet=new HashSet<>();
-
-
     public Doctor(){
 
     }
 
-    public Doctor(Long id, String firstName, String lastName, String username, String password, String uniqueDoctorNumber, Set<Patient> patientSet) {
+    public Doctor(Long id, String firstName, String lastName, String username, String password, String uniqueDoctorNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.uniqueDoctorNumber = uniqueDoctorNumber;
-        this.patientSet = patientSet;
     }
 
     public Long getId() {
