@@ -26,12 +26,12 @@ public class PrescriptionController {
                                           @RequestParam(required = false) String date,
                                           @RequestParam(required = false) String uniquePrescriptionNumber) {
 
-        Prescription prescription =prescriptionRepository.findPatientBy(id);
+        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
 
-        if (medicine!=null) {
+        if (medicine != null) {
             prescription.setMedicine(medicine);
         }
-        if (comment!=null) {
+        if (comment != null) {
             prescription.setComment(comment);
         }
         if (date != null) {

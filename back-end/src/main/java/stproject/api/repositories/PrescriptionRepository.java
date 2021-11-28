@@ -7,5 +7,5 @@ import stproject.api.entities.Prescription;
 public interface PrescriptionRepository extends JpaRepository<Prescription,Long> {
 
     @Query("SELECT p FROM Prescription p WHERE (p.id)= :id")
-    Prescription findPatientBy(Long id);
+    Prescription findPrescriptionById(Long id);
 }
