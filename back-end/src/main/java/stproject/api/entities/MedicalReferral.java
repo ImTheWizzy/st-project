@@ -18,7 +18,7 @@ public class MedicalReferral {
     private String date;
 
     @Column(name = "unique_referral_number")
-    private String uniquePrescriptionNumber;
+    private String uniqueReferralNumber;
 
     @ManyToOne
     @JoinColumn(name="doctors_specialists_id")
@@ -35,11 +35,11 @@ public class MedicalReferral {
     public MedicalReferral() {
     }
 
-    public MedicalReferral(Long id, String comment, String date, String uniquePrescriptionNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, Patient patient) {
+    public MedicalReferral(Long id, String comment, String date, String uniqueReferralNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, Patient patient) {
         this.id = id;
         this.comment = comment;
         this.date = date;
-        this.uniquePrescriptionNumber = uniquePrescriptionNumber;
+        this.uniqueReferralNumber = uniqueReferralNumber;
         this.doctorSpecialist = doctorSpecialist;
         this.doctor = doctor;
         this.patient = patient;
@@ -69,12 +69,12 @@ public class MedicalReferral {
         this.date = date;
     }
 
-    public String getUniquePrescriptionNumber() {
-        return uniquePrescriptionNumber;
+    public String getUniqueReferralNumber() {
+        return uniqueReferralNumber;
     }
 
-    public void setUniquePrescriptionNumber(String uniquePrescriptionNumber) {
-        this.uniquePrescriptionNumber = uniquePrescriptionNumber;
+    public void setUniqueReferralNumber(String uniqueReferralNumber) {
+        this.uniqueReferralNumber = uniqueReferralNumber;
     }
 
     public DoctorsSpecialists getDoctorSpecialist() {
