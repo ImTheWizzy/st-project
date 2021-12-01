@@ -1,4 +1,4 @@
-package stproject.api.controller;
+package stproject.api.controllers;
 
 import javax.validation.Valid;
 
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 
-import stproject.api.model.Doctor;
+import stproject.api.entities.Doctor;
 import stproject.api.service.DoctorService;
 
 @Controller
@@ -43,22 +43,22 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ModelAndView registerUser(@Valid Doctor doctor, BindingResult bindingResult, ModelMap modelMap) {
+	public ModelAndView registerDoctor(@Valid Doctor doctor, BindingResult bindingResult, ModelMap modelMap) {
 		ModelAndView modelAndView = new ModelAndView();
 		// Check for the validations
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("successMessage", "Please correct the errors in form!");
 			modelMap.addAttribute("bindingResult", bindingResult);
 		}
-		else if(doctorService.isUserAlreadyPresent(doctor)){
-			modelAndView.addObject("successMessage", "user already exists!");			
+		else if(doctorService.isDoctorAlreadyPresent(doctor)){
+			modelAndView.addObject("successMessage", "Doctor already exists!");			
 		}
-		// we will save the user if, no binding errors
+		// we will save the doctor if, no binding errors
 		else {
 			doctorService.saveDoctor(doctor);
-			modelAndView.addObject("successMessage", "User is registered successfully!");
+			modelAndView.addObject("successMessage", "Doctor is registered successfully!");
 		}
-		modelAndView.addObject("user", new Doctor());
+		modelAndView.addObject("doctor", new Doctor());
 		modelAndView.setViewName("register");
 		return modelAndView;
 	}

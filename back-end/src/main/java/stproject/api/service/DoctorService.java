@@ -1,6 +1,6 @@
 package stproject.api.service;
 
-import stproject.api.model.Doctor;
+import stproject.api.entities.Doctor;
 
 public interface DoctorService {
 
