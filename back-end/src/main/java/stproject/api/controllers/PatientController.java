@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import stproject.api.entities.Patient;
+import stproject.api.repositories.GenderRepository;
 import stproject.api.repositories.PatientRepository;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,8 @@ public class PatientController {
 
     @Autowired
     PatientRepository patientRepository;
+    @Autowired
+    GenderRepository genderRepository;
 
     @GetMapping("/all")
     public List<Patient> getAllPatients() {
@@ -48,6 +51,7 @@ public class PatientController {
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
                                           @RequestParam(required = false) String firstName,
                                           @RequestParam(required=false) String lastName,
+                                          @RequestParam(required=false) String gender,
                                           @RequestParam(required = false) String egn,
                                           @RequestParam(required = false) String address,
                                           @RequestParam(required = false) String phone,
@@ -62,6 +66,9 @@ public class PatientController {
         }
         if (lastName!=null) {
             patient.setLastName(lastName);
+        }
+        if(gender!=null){
+            patient.setGender(genderRepository.findGenderByName(gender.toLowerCase()));
         }
         if (egn!=null) {
             patient.setEgn(egn);
