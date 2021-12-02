@@ -1,10 +1,10 @@
-import { Container } from "@mui/material";
 import RootRoutes from "./RootRoutes";
 import "./App.css";
+import { Container } from "react-bootstrap";
 
 const App = () => {
   return (
-    <Container maxWidth="md">
+    <Container>
       <RootRoutes />
     </Container>
   );
