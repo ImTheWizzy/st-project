@@ -1,11 +1,6 @@
 package stproject.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.print.Doc;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
@@ -34,8 +29,7 @@ public class Doctor {
 
     }
 
-    public Doctor(Long id, String firstName, String lastName, String username, String password, String uniqueDoctorNumber) {
-        this.id = id;
+    public Doctor(String firstName, String lastName, String username, String password, String uniqueDoctorNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
