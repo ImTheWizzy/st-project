@@ -7,5 +7,5 @@ import stproject.api.entities.Doctor;
 
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
-
+    Doctor findByUsername(String username);
 }
