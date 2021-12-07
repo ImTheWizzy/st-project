@@ -1,10 +1,11 @@
 package stproject.api.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "doctor")
-public class Doctor {
+public class Doctor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,8 @@ public class Doctor {
 
     }
 
-    public Doctor(String firstName, String lastName, String username, String password, String uniqueDoctorNumber) {
+    public Doctor(Long id, String firstName, String lastName, String username, String password, String uniqueDoctorNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
