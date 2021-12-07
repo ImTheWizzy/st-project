@@ -1,21 +1,45 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Col, Form, Row, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ISignInData, signIn } from "../api/auth";
 
 const SignIn = () => {
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastVariant, setToastVariant] = useState<"success" | "danger">(
+    "danger"
+  );
+  const [toastMessage, setToastMessage] = useState<string>("");
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target).entries());
+    let formIsValid = true;
 
     const data: ISignInData = {
       username: formData.username.toString(),
       password: formData.password.toString(),
     };
 
-    const res = await signIn(data);
+    Object.values(data).forEach((entry) => {
+      if (!entry) return (formIsValid = false);
+    });
 
-    console.log(res);
+    if (formIsValid) {
+      try {
+        await signIn(data);
+        setToastVariant("success");
+        setToastMessage("Successful sign in!");
+      } catch (error) {
+        setToastVariant("danger");
+        setToastMessage("Invalid sign in data!");
+      }
+    } else {
+      setToastVariant("danger");
+      setToastMessage("Incomplete sign in data!");
+    }
+
+    setShowToast(true);
   };
 
   return (
@@ -54,6 +78,17 @@ const SignIn = () => {
             </Link>
           </Col>
         </Form>
+
+        <Toast
+          bg={toastVariant}
+          className="mt-4 text-center"
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          delay={3000}
+          autohide
+        >
+          <Toast.Body>{toastMessage}</Toast.Body>
+        </Toast>
       </Col>
     </Row>
   );
