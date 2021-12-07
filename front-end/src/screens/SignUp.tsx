@@ -1,19 +1,21 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ISignInData, signIn } from "../api/auth";
+import { ISignUpData, signUp } from "../api/auth";
 
-const SignIn = () => {
+const SignUp = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target).entries());
 
-    const data: ISignInData = {
+    const data: ISignUpData = {
+      firstName: formData.firstName.toString(),
+      lastName: formData.lastName.toString(),
       username: formData.username.toString(),
       password: formData.password.toString(),
     };
 
-    const res = await signIn(data);
+    const res = await signUp(data);
 
     console.log(res);
   };
@@ -21,9 +23,27 @@ const SignIn = () => {
   return (
     <Row className="d-flex justify-content-center align-items-start">
       <Col xs="4" className="bg-theme-dark rounded">
-        <h1 className="text-center">Sign In</h1>
+        <h1 className="text-center">Sign Up</h1>
 
         <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicFirstName">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="firstName"
+              placeholder="Enter your first name"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicLastName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="lastName"
+              placeholder="Enter your last name"
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -47,10 +67,10 @@ const SignIn = () => {
           </Button>
 
           <Col className="d-flex flex-row align-items-center justify-content-center mt-2">
-            <h6 className="m-0">Don't have an account?</h6>
+            <h6 className="m-0">Already have an account?</h6>
 
-            <Link to="/sign-up">
-              <h6 className="ml-2 mb-0">Sign up!</h6>
+            <Link to="/sign-in">
+              <h6 className="ml-2 mb-0">Sign in!</h6>
             </Link>
           </Col>
         </Form>
@@ -59,4 +79,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
