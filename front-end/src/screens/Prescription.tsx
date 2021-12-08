@@ -6,7 +6,7 @@ import {Col, Row} from "react-bootstrap";
 
 
 function Prescription() {
-    const url = "http://localhost:8081/prescription/save"
+    const url = "http://localhost:8081/prescription/save?medicine=&comment=&date=&uniquePrescriptionNumber="
     const [data, setData] =useState({
         medicine: "",
         comment: "",
@@ -16,18 +16,13 @@ function Prescription() {
     function submit(e: React.FormEvent<HTMLFormElement>){
 
         e.preventDefault();
-        console.log({
-            medicine: data.medicine,
-            comment: data.comment,
-            date: data.date,
-            uniquePrescriptionNumber: data.uniquePrescriptionNumber,
-        })
+
         axios.post(url,
             {
-                medicine: data.medicine,
-                comment: data.comment,
-                date: data.date,
-                uniquePrescriptionNumber: data.uniquePrescriptionNumber,
+                medicine: data.medicine.toString(),
+                comment: data.comment.toString(),
+                date: data.date.toString(),
+                uniquePrescriptionNumber: data.uniquePrescriptionNumber.toString(),
 
             }) .then(res => {
 

@@ -20,27 +20,28 @@ import {Col, Row} from "react-bootstrap";
          function submit(e: React.FormEvent<HTMLFormElement>){
               e.preventDefault();
               console.log({
-                  firstName: data.firstName,
-                  lastName: data.lastName,
-                  egn: data.egn,
-                  phone: data.phone,
-                  address: data.address,
-                  birthdate: data.birthdate,
-                  age: data.age,
-                  gender: data.gender,
-                  info: data.info,
-              })
+                      firstName: data.firstName.toString(),
+                      lastName: data.lastName.toString(),
+                      egn: data.egn.toString(),
+                      phone: data.phone.toString(),
+                      address: data.address.toString(),
+                      birthdate: data.birthdate.toString(),
+                      age: data.age.toString(),
+                      gender: data.gender.toString(),
+                      info: data.info.toString(),
+                  }
+              )
            axios.post(url,
                {
-                   firstName: data.firstName,
-                   lastName: data.lastName,
-                   egn: data.egn,
-                   phone: data.phone,
-                   address: data.address,
-                   birthdate: data.birthdate,
-                   age: data.age,
-                   gender: data.gender,
-                   info: data.info,
+                   firstName: data.firstName.toString(),
+                   lastName: data.lastName.toString(),
+                   egn: data.egn.toString(),
+                   phone: data.phone.toString(),
+                   address: data.address.toString(),
+                   birthdate: data.birthdate.toString(),
+                   age: data.age.toString(),
+                   gender: data.gender.toString(),
+                   info: data.info.toString(),
                }) .then(res => {
 
                    console.log(res.data)

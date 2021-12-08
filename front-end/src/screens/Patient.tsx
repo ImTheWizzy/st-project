@@ -5,30 +5,26 @@ import {Button, Col, Dropdown, DropdownButton, FormControl, Row} from "react-boo
 import axios from "axios";
 
 class Patient extends React.Component {
-    // @ts-ignore
-
-        state = {
-            error: null,
-            patients: [],
-            searchType:"FirstName",
-            searchValue:"",
-
-        }
-
+    state = {
+        error: null,
+        patients: [],
+        searchType:"FirstName",
+        searchValue:"",
+    }
 
     componentDidMount() {
-        const getPatient = async () =>
-        {
-            this.setState({loading:true});
-            const patients = await axios.get(`http://localhost:8081/patient/all`);
-            this.setState({patients: patients.data});
-            this.setState({loading: false})
-        };
-        getPatient();
+        axios.get(`http://localhost:8081/patient/all`)
+            .then(res => {
+                const patients = res.data;
+                this.setState({ patients });
+                console.log(
+res.data
+                )
+            })
 
     };
     // @ts-ignore
-    removeData = (id, e) =>
+    removeData = (id) =>
     {
         // @ts-ignore
         axios.delete(`http://localhost:8081/patient/delete?id=${id}`)
@@ -83,19 +79,18 @@ class Patient extends React.Component {
         const {error, patients} = this.state;
 
         if (error) {
-            // @ts-ignore
             return (
-                <div></div>
+                <div>{error}</div>
             )
         } else {
             return (
                 <div>
                     <header>
-                            <Row className="d-flex justify-content-center align-items-start">
-                                <Col xs="4" className="bg-theme-dark rounded">
-                                    <h1 className="text-center">Patient's information</h1>
-                                </Col>
-                            </Row>
+                        <Row className="d-flex justify-content-center align-items-start">
+                            <Col xs="4" className="bg-theme-dark rounded">
+                                <h1 className="text-center">Patient's information</h1>
+                            </Col>
+                        </Row>
                     </header>
                     <main>
                         <div>
@@ -139,7 +134,7 @@ class Patient extends React.Component {
                             </thead>
                             <tbody>
 
-                            {patients.map((patient: { id: React.Key | null | undefined; firstName: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; lastName: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; egn: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; address: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; phone: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; birthDate: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; age: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; gender: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; additionalInfo: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }) => (
+                            {patients.map((patient: any) => (
                                 <tr key={patient.id}>
                                     <td>{patient.id}</td>
                                     <td>{patient.firstName}</td>
@@ -149,10 +144,10 @@ class Patient extends React.Component {
                                     <td>{patient.phone}</td>
                                     <td>{patient.birthDate}</td>
                                     <td>{patient.age}</td>
-                                    <td></td>
+                                    <td>{patient.gender?.genderType}</td>
                                     <td>{patient.additionalInfo}</td>
                                     <Button variant="outline-danger" color="black"
-                                            onClick={(e) => this.removeData(patient.id, e)}>Delete </Button>
+                                            onClick={(e) => this.removeData(patient.id)}>Delete </Button>
                                     <Button variant="link" href="/prescription"> Add prescription </Button>
                                 </tr>
                             ))}
