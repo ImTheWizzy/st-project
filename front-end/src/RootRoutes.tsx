@@ -15,8 +15,6 @@ export default function RootRoutes() {
             <>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="*" element={<Navigate replace to="/" />} />
-              {/* <Route path="/sign-in" element={<Navigate replace to="/" />} />
-              <Route path="/sign-up" element={<Navigate replace to="/" />} /> */}
             </>
           ) : (
             <>
