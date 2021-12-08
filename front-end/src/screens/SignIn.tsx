@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Col, Form, Row, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ISignInData, signIn } from "../api/auth";
+import { handleSetSession } from "../hooks/useAuth";
 
 const SignIn = () => {
   const [showToast, setShowToast] = useState<boolean>(false);
@@ -27,9 +28,14 @@ const SignIn = () => {
 
     if (formIsValid) {
       try {
-        await signIn(data);
+        const response = await signIn(data);
+
         setToastVariant("success");
         setToastMessage("Successful sign in!");
+
+        response.doctor && handleSetSession(response.doctor);
+
+        window.location.href = "/";
       } catch (error) {
         setToastVariant("danger");
         setToastMessage("Invalid sign in data!");
