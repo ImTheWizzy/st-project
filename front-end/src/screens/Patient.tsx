@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
-import {Button, Dropdown, DropdownButton, FormControl} from "react-bootstrap";
+import {Button, Col, Dropdown, DropdownButton, FormControl, Row} from "react-bootstrap";
 import axios from "axios";
 
 class Patient extends React.Component {
@@ -91,9 +91,11 @@ class Patient extends React.Component {
             return (
                 <div>
                     <header>
-                        <h2>
-                            Patient's information page
-                        </h2>
+                            <Row className="d-flex justify-content-center align-items-start">
+                                <Col xs="4" className="bg-theme-dark rounded">
+                                    <h1 className="text-center">Patient's information</h1>
+                                </Col>
+                            </Row>
                     </header>
                     <main>
                         <div>

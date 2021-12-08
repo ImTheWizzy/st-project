@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
+import {Col, Row} from "react-bootstrap";
 
 
 function Prescription() {
@@ -45,9 +46,11 @@ function Prescription() {
     return( <>
     <div>
         <header>
-            <h2>
-                Prescription Page
-            </h2>
+            <Row className="d-flex justify-content-center align-items-start">
+                <Col xs="4" className="bg-theme-dark rounded">
+                    <h1 className="text-center">Prescription</h1>
+                </Col>
+            </Row>
         </header>
         <main>
         <Form onSubmit={(e) => submit(e)}>

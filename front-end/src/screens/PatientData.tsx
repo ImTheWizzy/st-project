@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
+import {Col, Row} from "react-bootstrap";
 
     function FormExample() {
         const url = "http://localhost:8081/patient/save?firstName=&lastName=&egn=&address=&phone=&birthDate=&age=&gender=&additionalInfo="
@@ -58,9 +59,11 @@ import axios from "axios";
           <>
             <div>
                 <header>
-                    <h2>
-                        Patient Data
-                    </h2>
+                    <Row className="d-flex justify-content-center align-items-start">
+                        <Col xs="4" className="bg-theme-dark rounded">
+                            <h1 className="text-center">Add Patient</h1>
+                        </Col>
+                    </Row>
                 </header>
                 <main>
                     <Form onSubmit={(e) => submit(e)}>
