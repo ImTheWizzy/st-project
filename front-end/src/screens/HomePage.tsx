@@ -1,5 +1,17 @@
+import { Button } from "react-bootstrap";
+import { handleDeleteSession } from "../hooks/useAuth";
+
 const HomePage = () => {
-  return <div>Home Page</div>;
+  const handleSignOut = () => {
+    handleDeleteSession();
+    window.location.reload();
+  };
+
+  return (
+    <div>
+      Home Page <Button onClick={handleSignOut}>Sign Out</Button>
+    </div>
+  );
 };
 
 export default HomePage;
