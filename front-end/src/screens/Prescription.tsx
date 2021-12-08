@@ -19,10 +19,10 @@ function Prescription() {
 
         axios.post(url,
             {
-                medicine: data.medicine.toString(),
-                comment: data.comment.toString(),
-                date: data.date.toString(),
-                uniquePrescriptionNumber: data.uniquePrescriptionNumber.toString(),
+                medicine: data.medicine,
+                comment: data.comment,
+                date: data.date,
+                uniquePrescriptionNumber: data.uniquePrescriptionNumber,
 
             }) .then(res => {
 
@@ -81,6 +81,6 @@ function Prescription() {
     </div>
     </>
     )
-};
+}
 
 export default Prescription;
