@@ -35,7 +35,7 @@ const SignIn = () => {
 
         response.doctor && handleSetSession(response.doctor);
 
-        window.location.href = "/";
+        window.location.reload();
       } catch (error) {
         setToastVariant("danger");
         setToastMessage("Invalid sign in data!");

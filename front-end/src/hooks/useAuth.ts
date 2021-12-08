@@ -6,6 +6,6 @@ export const handleSetSession = (token: string) => {
   localStorage.setItem("session", token);
 };
 
-export const useDeleteSession = () => {
+export const handleDeleteSession = () => {
   localStorage.removeItem("session");
 };
