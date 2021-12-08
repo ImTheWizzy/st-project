@@ -26,3 +26,15 @@ body,
 .mr-2 {
   margin-right: 0.5rem;
 }
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
