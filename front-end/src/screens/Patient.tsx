@@ -17,9 +17,7 @@ class Patient extends React.Component {
             .then(res => {
                 const patients = res.data;
                 this.setState({ patients });
-                console.log(
-res.data
-                )
+
             })
 
     };
@@ -129,7 +127,8 @@ res.data
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Info</th>
-                                <th>Action</th>
+                                <th>Delete</th>
+                                <th>Add Prescription</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -146,9 +145,10 @@ res.data
                                     <td>{patient.age}</td>
                                     <td>{patient.gender?.genderType}</td>
                                     <td>{patient.additionalInfo}</td>
-                                    <Button variant="outline-danger" color="black"
-                                            onClick={(e) => this.removeData(patient.id)}>Delete </Button>
-                                    <Button variant="link" href="/prescription"> Add prescription </Button>
+                                    <td><Button variant="outline-danger" color="black"
+                                                onClick={(e) => this.removeData(patient.id)}>Delete </Button></td>
+                                   <td> <Button variant="outline-primary" href="/prescription"> Add prescription </Button></td>
+
                                 </tr>
                             ))}
                             </tbody>
