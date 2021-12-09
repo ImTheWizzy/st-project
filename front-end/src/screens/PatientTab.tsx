@@ -3,8 +3,6 @@ import patientdata from "./patient-service";
 import {Col, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
-
-
 class PatientTab extends React.Component {
 
     url = window.location.href.split("/")

@@ -13,7 +13,6 @@ class Patient extends React.Component {
         searchType: "FirstName",
         searchValue: "",
     }
-
     componentDidMount() {
         axios.get(`http://localhost:8081/patient/all`)
             .then(res => {
@@ -22,7 +21,6 @@ class Patient extends React.Component {
                 this.setState({patients});
             })
     };
-
     removeData = (id: any) => {
         axios.delete(`http://localhost:8081/patient/delete?id=${id}`)
             .then(res => {
@@ -34,7 +32,6 @@ class Patient extends React.Component {
             }).catch(err => {
             console.log(err)
         })
-
     }
     onSearch = (e: any) => {
         e.preventDefault();
@@ -60,9 +57,7 @@ class Patient extends React.Component {
                 });
             }
         }
-
     }
-
     render() {
         const {error, patients} = this.state;
 
@@ -91,9 +86,7 @@ class Patient extends React.Component {
                             <DropdownButton
                                 variant="outline-secondary"
                                 title={this.state.searchType}
-                                id="input-group-dropdown-1"
-
-                            >
+                                id="input-group-dropdown-1">
                                 <Dropdown.Item href="#" onClick={() => this.setState({searchType: "FirstName"})}>First
                                     Name</Dropdown.Item>
                                 <Dropdown.Item href="#"
@@ -150,11 +143,8 @@ class Patient extends React.Component {
                     </main>
                 </div>
             )
-
-
         }
     }
-
 }
 
 export default Patient;
