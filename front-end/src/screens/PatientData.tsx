@@ -5,7 +5,7 @@ import axios from "axios";
 import {Col, Row} from "react-bootstrap";
 
 function FormExample() {
-    const url = "http://localhost:8081/patient/save?firstName=&lastName=&egn=&address=&phone=&birthDate=&age=&gender=&additionalInfo="
+    const url = "http://localhost:8081/patient/save"
     const [data, setData] = useState({
         firstName: "",
         lastName: "",

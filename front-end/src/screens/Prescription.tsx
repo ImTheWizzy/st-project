@@ -6,7 +6,7 @@ import {Col, Row} from "react-bootstrap";
 
 
 function Prescription() {
-    const url = "http://localhost:8081/prescription/save?medicine=&comment=&date=&uniquePrescriptionNumber="
+    const url = "http://localhost:8081/prescription/save"
     const [data, setData] = useState({
         medicine: "",
         comment: "",
