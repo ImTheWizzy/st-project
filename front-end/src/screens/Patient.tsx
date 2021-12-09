@@ -36,18 +36,6 @@ class Patient extends React.Component {
         })
 
     }
-    view = (id: any) => {
-        axios.get(`http://localhost:8081/patient/all?id=${id}`)
-            .then(res => {
-                const newPatients = this.state.patients.filter((patient: any) => patient.id !== id)
-                console.log(newPatients)
-                this.setState({patients: newPatients});
-
-            }).catch(err => {
-            console.log(err)
-        })
-
-    }
     onSearch = (e: any) => {
         e.preventDefault();
 

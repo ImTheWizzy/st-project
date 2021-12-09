@@ -21,6 +21,7 @@ class PatientTab extends React.Component {
     patientsArray = [];
 
     componentDidMount() {
+
         this.patientsArray = patientdata.patientsArr.filter((item: any) => item.id == this.url[this.url.length - 1])
         this.setState({
             ...this.state,
