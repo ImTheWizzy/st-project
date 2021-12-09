@@ -5,21 +5,23 @@ import SignUp from "./screens/SignUp";
 import Patient from "./screens/Patient";
 import PatientData from "./screens/PatientData";
 import Prescription from "./screens/Prescription";
+import PatientTab from "./screens/PatientTab";
 
 export default function RootRoutes() {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/sign-in" element={<SignIn />}></Route>
-          <Route path="/sign-up" element={<SignUp />}></Route>
-            <Route path="/patient" element={<Patient />}></Route>
-          <Route path="/patientdata" element={<PatientData />}></Route>
-          <Route path="/prescription" element={<Prescription />}></Route>
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/sign-in" element={<SignIn />}></Route>
+                    <Route path="/sign-up" element={<SignUp />}></Route>
+                    <Route path="/patient" element={<Patient />}></Route>
+                    <Route path="/patientdata" element={<PatientData />}></Route>
+                    <Route path="/prescription" element={<Prescription />}></Route>
+                    <Route path="/patientTab/:id" element={<PatientTab />}></Route>
 
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
 }

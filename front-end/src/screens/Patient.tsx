@@ -3,68 +3,69 @@ import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {Button, Col, Dropdown, DropdownButton, FormControl, Row} from "react-bootstrap";
 import axios from "axios";
+import patientdata from "./patient-service";
+import {Link} from "react-router-dom";
 
 class Patient extends React.Component {
     state = {
         error: null,
         patients: [],
-        searchType:"FirstName",
-        searchValue:"",
+        searchType: "FirstName",
+        searchValue: "",
     }
 
     componentDidMount() {
         axios.get(`http://localhost:8081/patient/all`)
             .then(res => {
                 const patients = res.data;
-                this.setState({ patients });
-
+                patientdata.patientsArr = res.data;
+                this.setState({patients});
             })
-
     };
-    // @ts-ignore
-    removeData = (id) =>
-    {
-        // @ts-ignore
+
+    removeData = (id: any) => {
         axios.delete(`http://localhost:8081/patient/delete?id=${id}`)
             .then(res => {
                 debugger
-                // @ts-ignore
-                const newPatients = this.state.patients.filter(patient => patient.id !== id)
+                const newPatients = this.state.patients.filter((patient: any) => patient.id !== id)
                 console.log(newPatients)
-                // @ts-ignore
-                this.setState({ patients: newPatients });
+                this.setState({patients: newPatients});
 
             }).catch(err => {
             console.log(err)
         })
 
     }
-    // @ts-ignore
-    onSearch = (e) => {
+    view = (id: any) => {
+        axios.get(`http://localhost:8081/patient/all?id=${id}`)
+            .then(res => {
+                const newPatients = this.state.patients.filter((patient: any) => patient.id !== id)
+                console.log(newPatients)
+                this.setState({patients: newPatients});
+
+            }).catch(err => {
+            console.log(err)
+        })
+
+    }
+    onSearch = (e: any) => {
         e.preventDefault();
-        // @ts-ignore
-        if (this.state.searchType === "EGN")
-        {
+
+        if (this.state.searchType === "EGN") {
             axios.get(`http://localhost:8081/patient/search/egn?egn=${e.target.value}`)
                 .then(res => {
 
-                    // @ts-ignore
-                    this.setState({ patients: [res.data]});
+                    this.setState({patients: [res.data]});
 
                 }).catch(err => {
                 console.log(err)
             });
-        }
-        else { // @ts-ignore
-            if (this.state.searchType === "FirstName")
-            {
+        } else {
+            if (this.state.searchType === "FirstName") {
                 axios.get(`http://localhost:8081/patient/search/firstName?firstName=${e.target.value}`)
                     .then(res => {
 
-                        // @ts-ignore
-                        this.setState({ patients: [res.data] });
-
-
+                        this.setState({patients: [res.data]});
 
                     }).catch(err => {
                     console.log(err)
@@ -73,6 +74,7 @@ class Patient extends React.Component {
         }
 
     }
+
     render() {
         const {error, patients} = this.state;
 
@@ -129,6 +131,7 @@ class Patient extends React.Component {
                                 <th>Info</th>
                                 <th>Delete</th>
                                 <th>Add Prescription</th>
+                                <th>View Patient</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -147,7 +150,9 @@ class Patient extends React.Component {
                                     <td>{patient.additionalInfo}</td>
                                     <td><Button variant="outline-danger" color="black"
                                                 onClick={(e) => this.removeData(patient.id)}>Delete </Button></td>
-                                   <td> <Button variant="outline-primary" href="/prescription"> Add prescription </Button></td>
+                                    <td><Button variant="outline-primary" href="/prescription"> Add
+                                        prescription </Button></td>
+                                    <td><Link to={`/patientTab/${patient.id}`} > View </Link></td>
 
                                 </tr>
                             ))}
@@ -163,4 +168,5 @@ class Patient extends React.Component {
     }
 
 }
+
 export default Patient;
