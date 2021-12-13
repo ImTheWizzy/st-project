@@ -6,12 +6,12 @@ import {Col, Row} from "react-bootstrap";
 
 
 function Prescription() {
-    const url = "http://localhost:8081/prescription/save"
+    const url = "http://localhost:8081/medicalReferral/save"
     const [data, setData] = useState({
-        medicine: "",
+        doctorType: "",
         comment: "",
         date: "",
-        uniquePrescriptionNumber: ""
+        uniqueReferralNumber: ""
     })
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -20,10 +20,10 @@ function Prescription() {
 
         axios.post(url,
             {
-                medicine: data.medicine,
+                medicine: data.doctorType,
                 comment: data.comment,
                 date: data.date,
-                uniquePrescriptionNumber: data.uniquePrescriptionNumber,
+                uniqueReferralNumber: data.uniqueReferralNumber,
 
             }).then(res => {
 
@@ -50,10 +50,10 @@ function Prescription() {
                 </header>
                 <main>
                     <Form onSubmit={(e) => submit(e)}>
-                        <Form.Group className="mb-3" controlId="medicine">
+                        <Form.Group className="mb-3" controlId="doctorType">
                             <Form.Label>Medicine</Form.Label>
-                            <Form.Control type="text" placeholder="medicine"
-                                          value={data.medicine}
+                            <Form.Control type="text" placeholder="doctorType"
+                                          value={data.doctorType}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="comment">
@@ -68,10 +68,10 @@ function Prescription() {
                                           value={data.date}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="uniquePrescriptionNumber">
+                        <Form.Group className="mb-3" controlId="uniqueReferralNumber">
                             <Form.Label>Prescription Number</Form.Label>
-                            <Form.Control type="text" placeholder="uniquePrescriptionNumber"
-                                          value={data.uniquePrescriptionNumber}
+                            <Form.Control type="text" placeholder="uniqueReferralNumber"
+                                          value={data.uniqueReferralNumber}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
                         <Button variant="primary" type="submit">

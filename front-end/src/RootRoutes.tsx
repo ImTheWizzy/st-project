@@ -6,6 +6,7 @@ import Patient from "./screens/Patient";
 import PatientData from "./screens/PatientData";
 import Prescription from "./screens/Prescription";
 import PatientTab from "./screens/PatientTab";
+import MedicalReferal from "./screens/MedicalReferal";
 
 export default function RootRoutes() {
     return (
@@ -19,6 +20,7 @@ export default function RootRoutes() {
                     <Route path="/patientdata" element={<PatientData />}></Route>
                     <Route path="/prescription" element={<Prescription />}></Route>
                     <Route path="/patientTab/:id" element={<PatientTab />}></Route>
+                    <Route path="/medicalreferral" element={<MedicalReferal />}></Route>
 
                 </Routes>
             </BrowserRouter>

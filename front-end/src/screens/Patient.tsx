@@ -112,6 +112,7 @@ class Patient extends React.Component {
                                 <th>Info</th>
                                 <th>Delete</th>
                                 <th>Add Prescription</th>
+                                <th>Add Medical Referral</th>
                                 <th>View Patient</th>
                             </tr>
                             </thead>
@@ -133,6 +134,8 @@ class Patient extends React.Component {
                                                 onClick={(e) => this.removeData(patient.id)}>Delete </Button></td>
                                     <td><Button variant="outline-primary" href="/prescription"> Add
                                         prescription </Button></td>
+                                    <td><Button variant="outline-primary" href="/medicalreferral"> Add
+                                        medical referal </Button></td>
                                     <td><Link to={`/patientTab/${patient.id}`} > View </Link></td>
 
                                 </tr>
