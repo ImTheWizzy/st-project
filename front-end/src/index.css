@@ -20,21 +20,21 @@ body,
 }
 
 .ml-2 {
-  margin-left: 0.5rem;
+  margin-left: 0.5rem !important;
 }
 
 .mr-2 {
-  margin-right: 0.5rem;
+  margin-right: 0.5rem !important;
 }
 
 .font-weight-bold {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .font-weight-normal {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .rounded-lg {
-  border-radius: 0.5rem;
+  border-radius: 0.5rem !important;
 }

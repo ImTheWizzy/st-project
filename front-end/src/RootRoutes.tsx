@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useSession } from "./hooks/useAuth";
-import HomePage from "./screens/HomePage";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
+import Patient from "./screens/Patient";
+import PatientData from "./screens/PatientData";
+import Prescription from "./screens/Prescription";
+import PatientTab from "./screens/PatientTab";
+import MedicalReferal from "./screens/MedicalReferal";
 
 export default function RootRoutes() {
   const { user } = useSession();
@@ -13,8 +17,15 @@ export default function RootRoutes() {
         <Routes>
           {user ? (
             <>
-              <Route path="/" element={<HomePage />}></Route>
-              <Route path="*" element={<Navigate replace to="/" />} />
+              <Route path="/patient" element={<Patient />}></Route>
+              <Route path="/patientdata" element={<PatientData />}></Route>
+              <Route path="/prescription" element={<Prescription />}></Route>
+              <Route path="/patientTab/:id" element={<PatientTab />}></Route>
+              <Route
+                path="/medicalreferral"
+                element={<MedicalReferal />}
+              ></Route>
+              <Route path="*" element={<Navigate replace to="/patient" />} />
             </>
           ) : (
             <>

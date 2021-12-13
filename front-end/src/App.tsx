@@ -1,10 +1,28 @@
 import "./App.css";
 import RootRoutes from "./RootRoutes";
-import { Container, Navbar } from "react-bootstrap";
-import { useSession } from "./hooks/useAuth";
+import {
+  Button,
+  Container,
+  Navbar,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+import { handleDeleteSession, useSession } from "./hooks/useAuth";
+import { GoSignOut } from "react-icons/go";
 
 const App = () => {
   const { user } = useSession();
+
+  const handleSignOut = () => {
+    handleDeleteSession();
+    window.location.reload();
+  };
+
+  const renderTooltip = (props: any) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Sign Out
+    </Tooltip>
+  );
 
   return (
     <div className="bg-light h-100 w-100 d-flex flex-column">
@@ -15,9 +33,21 @@ const App = () => {
           </Navbar.Brand>
 
           {user && (
-            <Navbar.Text className="text-white">
-              <h6 className="text-white font-weight-normal m-0">{user}</h6>
-            </Navbar.Text>
+            <div className="d-flex justify-content-center align-items-center">
+              <Navbar.Text className="text-white">
+                <h6 className="text-white font-weight-normal m-0">{user}</h6>
+              </Navbar.Text>
+
+              <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                <Button className="rounded-circle ml-2" onClick={handleSignOut}>
+                  <GoSignOut />
+                </Button>
+              </OverlayTrigger>
+            </div>
           )}
         </Container>
       </Navbar>
