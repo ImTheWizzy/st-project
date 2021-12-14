@@ -27,9 +27,11 @@ public class MedicalReferralController {
                                           @RequestParam(required = false) String doctorType,
                                           @RequestParam(required = false) String comment,
                                           @RequestParam(required = false) String date,
-                                          @RequestParam(required = false) String uniqueReferralNumber) {
+                                          @RequestParam(required = false) String uniqueReferralNumber,
+                                          MedicalReferral medicalReferral) {
 
-        MedicalReferral medicalReferral = medicalReferralRepository.findMedicalReferralBy(id);
+//        MedicalReferral medicalReferral = medicalReferralRepository.findMedicalReferralBy(id);
+        System.out.println(doctorType);
         if (doctorType != null) {
             medicalReferral.setDoctorSpecialist(doctorsSpecialistsRepository.findDoctorsSpecialistsByDoctorType(doctorType.toLowerCase()));
         }
@@ -45,15 +47,16 @@ public class MedicalReferralController {
 
         medicalReferral = medicalReferralRepository.save(medicalReferral);
 
-        Map<String,Object> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("medicalReferralId", medicalReferral.getId());
-        response.put("message","Успешно записан!");
+        response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
+
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteMedicalReferral(@RequestParam Long id){
-        if(id == null){
+    public ResponseEntity<?> deleteMedicalReferral(@RequestParam Long id) {
+        if (id == null) {
             return ResponseEntity.badRequest().body("Не сте подали ID!");
         }
 

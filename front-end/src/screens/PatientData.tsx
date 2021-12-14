@@ -12,26 +12,29 @@ function FormExample() {
         egn: "",
         phone: "",
         address: "",
-        birthdate: "",
+        birthDate: "",
         age: "",
-        gender: "",
-        info: "",
+        genderType: "",
+        additionalInfo: "",
     })
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        axios.post(url,
-            {
-                firstName: data.firstName,
-                lastName: data.lastName,
-                egn: data.egn,
-                phone: data.phone,
-                address: data.address,
-                birthdate: data.birthdate,
-                age: data.age,
-                gender: data.gender,
-                info: data.info,
-            }).then(res => {
+        axios.post(url, null,{
+            params:
+                {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    egn: data.egn,
+                    phone: data.phone,
+                    address: data.address,
+                    birthDate: data.birthDate,
+                    age: data.age,
+                    genderType: data.genderType,
+                    additionalInfo: data.additionalInfo,
+
+                }
+        }).then(res => {
 
             console.log(res.data)
         })
@@ -86,10 +89,10 @@ function FormExample() {
                                           value={data.phone}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="birthdate">
+                        <Form.Group className="mb-3" controlId="birthDate">
                             <Form.Label>Birth date</Form.Label>
                             <Form.Control type="text" placeholder="Birth date"
-                                          value={data.birthdate}
+                                          value={data.birthDate}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="age">
@@ -98,17 +101,17 @@ function FormExample() {
                                           value={data.age}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="gender">
+                        <Form.Group className="mb-3" controlId="genderType">
                             <Form.Label>Gender</Form.Label>
                             <Form.Control type="text" placeholder="Gender"
-                                          value={data.gender}
+                                          value={data.genderType}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="info">
+                        <Form.Group className="mb-3" controlId="additionalInfo">
                             <Form.Label>Additional information</Form.Label>
                             <Form.Control as="textarea" placeholder="info"
                                           rows={3}
-                                          value={data.info}
+                                          value={data.additionalInfo}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
                         <Button variant="primary" type="submit">

@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import stproject.api.entities.Patient;
 import stproject.api.repositories.GenderRepository;
 import stproject.api.repositories.PatientRepository;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -27,79 +25,83 @@ public class PatientController {
         return patientRepository.findAll();
     }
 
-   @GetMapping("/search/firstName")
-    public ResponseEntity<?> getPatientByFirstName(@RequestParam(required = false) String firstName){
-        if(firstName == null || firstName.isBlank())
+    @GetMapping("/search/firstName")
+    public ResponseEntity<?> getPatientByFirstName(@RequestParam(required = false) String firstName) {
+        if (firstName == null || firstName.isBlank())
             return ResponseEntity.ok("Не сте въвели име!");
 
         Optional<Patient> resultFirstName = patientRepository.findPatientByFirstName(firstName.toLowerCase());
-        return resultFirstName.isPresent()?ResponseEntity.ok(resultFirstName.get()) : ResponseEntity.ok("Няма намерен човек с това име!");
+        return resultFirstName.isPresent() ? ResponseEntity.ok(resultFirstName.get()) : ResponseEntity.ok("Няма намерен човек с това име!");
 
     }
 
     @GetMapping("/search/egn")
-    public ResponseEntity<?> getPatientByEgn(@RequestParam(required = false) String egn){
-        if(egn == null || egn.isBlank())
+    public ResponseEntity<?> getPatientByEgn(@RequestParam(required = false) String egn) {
+        if (egn == null || egn.isBlank())
             return ResponseEntity.ok("Не сте въвели ЕГН!");
 
         Optional<Patient> resultEgn = patientRepository.findPatientByEgn(egn);
-        return resultEgn.isPresent()?ResponseEntity.ok(resultEgn.get()) : ResponseEntity.ok("Няма намерен човек с това ЕГН!");
+        return resultEgn.isPresent() ? ResponseEntity.ok(resultEgn.get()) : ResponseEntity.ok("Няма намерен човек с това ЕГН!");
 
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
                                           @RequestParam(required = false) String firstName,
-                                          @RequestParam(required=false) String lastName,
-                                          @RequestParam(required=false) String gender,
+                                          @RequestParam(required = false) String lastName,
+                                          @RequestParam(required = false) String genderType,
                                           @RequestParam(required = false) String egn,
                                           @RequestParam(required = false) String address,
                                           @RequestParam(required = false) String phone,
                                           @RequestParam(required = false) String birthDate,
-                                          @RequestParam(required = false) Integer age ,
-                                          @RequestParam(required = false) String additionalInfo) {
+                                          @RequestParam(required = false) Integer age,
+                                          @RequestParam(required = false) String additionalInfo,
+                                          Patient patient) {
 
-        Patient patient = patientRepository.findPatientBy(id);
-
-        if (firstName!=null) {
+//         Patient patient = patientRepository.findPatientBy(id);
+        System.out.println(firstName);
+        if (firstName != null) {
             patient.setFirstName(firstName);
         }
-        if (lastName!=null) {
+        if (lastName != null) {
             patient.setLastName(lastName);
         }
-        if(gender!=null){
-            patient.setGender(genderRepository.findGenderByName(gender.toLowerCase()));
+        System.out.println(genderType);
+        if (genderType != null) {
+            patient.setGender(genderRepository.findGenderByName(genderType.toLowerCase()));
         }
-        if (egn!=null) {
+        if (egn != null) {
             patient.setEgn(egn);
         }
-        if (address!=null) {
+        if (address != null) {
             patient.setAddress(address);
         }
-        if (phone!=null) {
+        if (phone != null) {
             patient.setPhone(phone);
         }
-        if (birthDate!=null) {
+        System.out.println(birthDate);
+        if (birthDate != null) {
             patient.setBirthDate(birthDate);
         }
-        if (age!=null) {
+        if (age != null) {
             patient.setAge(age);
         }
-        if (additionalInfo!=null) {
+        if (additionalInfo != null) {
             patient.setAdditionalInfo(additionalInfo);
         }
 
+
         patient = patientRepository.save(patient);
 
-        Map<String,Object> response=new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("patientId", patient.getId());
-        response.put("message","Успешно записан!");
+        response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
+
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deletePatient(@RequestParam Long id){
-        if(id == null){
+    public ResponseEntity<?> deletePatient(@RequestParam Long id) {
+        if (id == null) {
             return ResponseEntity.badRequest().body("Не сте подали ID!");
         }
 
