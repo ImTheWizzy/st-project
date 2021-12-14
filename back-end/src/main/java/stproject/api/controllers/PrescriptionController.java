@@ -24,10 +24,11 @@ public class PrescriptionController {
                                           @RequestParam(required = false) String medicine,
                                           @RequestParam(required = false) String comment,
                                           @RequestParam(required = false) String date,
-                                          @RequestParam(required = false) String uniquePrescriptionNumber) {
+                                          @RequestParam(required = false) String uniquePrescriptionNumber,
+                                          Prescription prescription) {
 
-        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
-
+//        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
+        System.out.println(medicine);
         if (medicine != null) {
             prescription.setMedicine(medicine);
         }
@@ -36,6 +37,7 @@ public class PrescriptionController {
         }
         if (date != null) {
             prescription.setDate(date);
+            System.out.println(date);
         }
         if (uniquePrescriptionNumber != null) {
             prescription.setUniquePrescriptionNumber(uniquePrescriptionNumber);
@@ -43,15 +45,17 @@ public class PrescriptionController {
 
         prescription = prescriptionRepository.save(prescription);
 
-        Map<String,Object> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("prescriptionId", prescription.getId());
-        response.put("message","Успешно записан!");
+        response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);
 
+
     }
+
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deletePrescription(@RequestParam Long id){
-        if(id == null){
+    public ResponseEntity<?> deletePrescription(@RequestParam Long id) {
+        if (id == null) {
             return ResponseEntity.badRequest().body("Не сте подали ID!");
         }
 

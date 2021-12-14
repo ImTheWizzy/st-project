@@ -11,21 +11,27 @@ function Prescription() {
         medicine: "",
         comment: "",
         date: "",
-        uniquePrescriptionNumber: ""
+        uniquePrescriptionNumber: "",
+
     })
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
 
         e.preventDefault();
+        console.log
+        (
+            data
+        )
+        axios.post(url, null,{
+            params:
+                {
+                    medicine: data.medicine,
+                    comment: data.comment,
+                    date: data.date,
+                    uniquePrescriptionNumber: data.uniquePrescriptionNumber,
 
-        axios.post(url,
-            {
-                medicine: data.medicine,
-                comment: data.comment,
-                date: data.date,
-                uniquePrescriptionNumber: data.uniquePrescriptionNumber,
-
-            }).then(res => {
+                }
+        }).then(res => {
 
             console.log(res.data)
         })

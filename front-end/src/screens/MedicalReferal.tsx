@@ -11,21 +11,23 @@ function Prescription() {
         doctorType: "",
         comment: "",
         date: "",
-        uniqueReferralNumber: ""
-    })
+        uniqueReferralNumber: "",
 
+    })
     function submit(e: React.FormEvent<HTMLFormElement>) {
 
         e.preventDefault();
 
-        axios.post(url,
-            {
-                medicine: data.doctorType,
-                comment: data.comment,
-                date: data.date,
-                uniqueReferralNumber: data.uniqueReferralNumber,
+        axios.post(url, null,{
+            params:
+                {
+                    doctorType: data.doctorType,
+                    comment: data.comment,
+                    date: data.date,
+                    uniqueReferralNumber: data.uniqueReferralNumber,
 
-            }).then(res => {
+                }
+        }).then(res => {
 
             console.log(res.data)
         })
@@ -44,14 +46,14 @@ function Prescription() {
                 <header>
                     <Row className="d-flex justify-content-center align-items-start">
                         <Col xs="4" className="bg-theme-dark rounded">
-                            <h1 className="text-center">Prescription</h1>
+                            <h1 className="text-center">Medical Referral </h1>
                         </Col>
                     </Row>
                 </header>
                 <main>
                     <Form onSubmit={(e) => submit(e)}>
                         <Form.Group className="mb-3" controlId="doctorType">
-                            <Form.Label>Medicine</Form.Label>
+                            <Form.Label>Doctor type</Form.Label>
                             <Form.Control type="text" placeholder="doctorType"
                                           value={data.doctorType}
                                           onChange={(e) => handle(e)}/>
@@ -69,7 +71,7 @@ function Prescription() {
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="uniqueReferralNumber">
-                            <Form.Label>Prescription Number</Form.Label>
+                            <Form.Label>Referral Number</Form.Label>
                             <Form.Control type="text" placeholder="uniqueReferralNumber"
                                           value={data.uniqueReferralNumber}
                                           onChange={(e) => handle(e)}/>

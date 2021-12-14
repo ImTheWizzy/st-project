@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./screens/HomePage";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useSession } from "./hooks/useAuth";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import Patient from "./screens/Patient";
@@ -9,21 +9,33 @@ import PatientTab from "./screens/PatientTab";
 import MedicalReferal from "./screens/MedicalReferal";
 
 export default function RootRoutes() {
-    return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<HomePage />}></Route>
-                    <Route path="/sign-in" element={<SignIn />}></Route>
-                    <Route path="/sign-up" element={<SignUp />}></Route>
-                    <Route path="/patient" element={<Patient />}></Route>
-                    <Route path="/patientdata" element={<PatientData />}></Route>
-                    <Route path="/prescription" element={<Prescription />}></Route>
-                    <Route path="/patientTab/:id" element={<PatientTab />}></Route>
-                    <Route path="/medicalreferral" element={<MedicalReferal />}></Route>
+  const { user } = useSession();
 
-                </Routes>
-            </BrowserRouter>
-        </>
-    );
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          {user ? (
+            <>
+              <Route path="/patient" element={<Patient />}></Route>
+              <Route path="/patientdata" element={<PatientData />}></Route>
+              <Route path="/prescription" element={<Prescription />}></Route>
+              <Route path="/patientTab/:id" element={<PatientTab />}></Route>
+              <Route
+                path="/medicalreferral"
+                element={<MedicalReferal />}
+              ></Route>
+              <Route path="*" element={<Navigate replace to="/patient" />} />
+            </>
+          ) : (
+            <>
+              <Route path="/sign-in" element={<SignIn />}></Route>
+              <Route path="/sign-up" element={<SignUp />}></Route>
+              <Route path="*" element={<Navigate replace to="/sign-up" />} />
+            </>
+          )}
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }

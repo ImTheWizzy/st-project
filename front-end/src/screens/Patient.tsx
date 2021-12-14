@@ -109,7 +109,7 @@ class Patient extends React.Component {
                                 <th>Birth date</th>
                                 <th>Age</th>
                                 <th>Gender</th>
-                                <th>Info</th>
+                                {/*<th>Info</th>*/}
                                 <th>Delete</th>
                                 <th>Add Prescription</th>
                                 <th>Add Medical Referral</th>
@@ -129,7 +129,7 @@ class Patient extends React.Component {
                                     <td>{patient.birthDate}</td>
                                     <td>{patient.age}</td>
                                     <td>{patient.gender?.genderType}</td>
-                                    <td>{patient.additionalInfo}</td>
+                                    {/*<td>{patient.additionalInfo}</td>*/}
                                     <td><Button variant="outline-danger" color="black"
                                                 onClick={(e) => this.removeData(patient.id)}>Delete </Button></td>
                                     <td><Button variant="outline-primary" href="/prescription"> Add
