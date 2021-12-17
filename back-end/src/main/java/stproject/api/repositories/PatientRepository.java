@@ -12,7 +12,7 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
    Optional<Patient> findPatientByFirstName(String firstName);
 
    @Query("SELECT p FROM Patient p WHERE (p.id)= :id")
-   Patient findPatientBy(Long id);
+   Patient findPatientById(Long id);
 
    @Query("SELECT p FROM Patient p WHERE (p.egn)= :egn")
    Optional<Patient> findPatientByEgn(String egn);

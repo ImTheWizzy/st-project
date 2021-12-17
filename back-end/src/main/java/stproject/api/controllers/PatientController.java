@@ -58,15 +58,13 @@ public class PatientController {
                                           @RequestParam(required = false) String additionalInfo,
                                           Patient patient) {
 
-//         Patient patient = patientRepository.findPatientBy(id);
-        System.out.println(firstName);
+       // Patient patient = patientRepository.findPatientById(id);
         if (firstName != null) {
             patient.setFirstName(firstName);
         }
         if (lastName != null) {
             patient.setLastName(lastName);
         }
-        System.out.println(genderType);
         if (genderType != null) {
             patient.setGender(genderRepository.findGenderByName(genderType.toLowerCase()));
         }
@@ -79,7 +77,6 @@ public class PatientController {
         if (phone != null) {
             patient.setPhone(phone);
         }
-        System.out.println(birthDate);
         if (birthDate != null) {
             patient.setBirthDate(birthDate);
         }
@@ -89,7 +86,6 @@ public class PatientController {
         if (additionalInfo != null) {
             patient.setAdditionalInfo(additionalInfo);
         }
-
 
         patient = patientRepository.save(patient);
 

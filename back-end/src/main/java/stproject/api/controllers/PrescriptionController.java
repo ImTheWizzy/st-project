@@ -21,6 +21,8 @@ public class PrescriptionController {
 
     @PostMapping("/save")
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
+                                          @RequestParam(required = false) String firstName,
+                                          @RequestParam(required = false) String lastName,
                                           @RequestParam(required = false) String medicine,
                                           @RequestParam(required = false) String comment,
                                           @RequestParam(required = false) String date,
@@ -29,6 +31,12 @@ public class PrescriptionController {
 
 //        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
         System.out.println(medicine);
+        if (firstName != null) {
+            prescription.setFirstName(firstName);
+        }
+        if (lastName != null) {
+            prescription.setLastName(lastName);
+        }
         if (medicine != null) {
             prescription.setMedicine(medicine);
         }

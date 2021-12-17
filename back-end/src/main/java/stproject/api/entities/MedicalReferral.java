@@ -28,21 +28,28 @@ public class MedicalReferral {
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name="patient_id")
-    private Patient patient;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "egn")
+    private String egn;
 
     public MedicalReferral() {
     }
 
-    public MedicalReferral(Long id, String comment, String date, String uniqueReferralNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, Patient patient) {
+    public MedicalReferral(Long id, String comment, String date, String uniqueReferralNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, String firstName, String lastName, String egn) {
         this.id = id;
         this.comment = comment;
         this.date = date;
         this.uniqueReferralNumber = uniqueReferralNumber;
         this.doctorSpecialist = doctorSpecialist;
         this.doctor = doctor;
-        this.patient = patient;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.egn = egn;
     }
 
     public Long getId() {
@@ -93,11 +100,27 @@ public class MedicalReferral {
         this.doctor = doctor;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEgn() {
+        return egn;
+    }
+
+    public void setEgn(String egn) {
+        this.egn = egn;
     }
 }

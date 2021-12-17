@@ -4,6 +4,8 @@ import antlr.StringUtils;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "prescription")
@@ -29,22 +31,25 @@ public class Prescription {
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name="patient_id")
-    private Patient patient;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     public Prescription(){
 
     }
 
-    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, Patient patient) {
+    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, String firstName, String lastName) {
         this.id = id;
         this.medicine = medicine;
         this.comment = comment;
         this.date = date;
         this.uniquePrescriptionNumber = uniquePrescriptionNumber;
         this.doctor = doctor;
-        this.patient = patient;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Long getId() {
@@ -95,11 +100,19 @@ public class Prescription {
         this.doctor = doctor;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

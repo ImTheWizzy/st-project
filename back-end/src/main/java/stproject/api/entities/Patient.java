@@ -1,6 +1,8 @@
 package stproject.api.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "patient")
@@ -147,4 +149,5 @@ public class Patient {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
+
 }
