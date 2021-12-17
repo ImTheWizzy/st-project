@@ -30,7 +30,6 @@ public class PrescriptionController {
                                           Prescription prescription) {
 
 //        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
-        System.out.println(medicine);
         if (firstName != null) {
             prescription.setFirstName(firstName);
         }
@@ -45,7 +44,6 @@ public class PrescriptionController {
         }
         if (date != null) {
             prescription.setDate(date);
-            System.out.println(date);
         }
         if (uniquePrescriptionNumber != null) {
             prescription.setUniquePrescriptionNumber(uniquePrescriptionNumber);
