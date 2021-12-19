@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class DoctorController {
             SecurityContext securityContext = SecurityContextHolder.getContext();
             securityContext.setAuthentication(authRequest);
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            attr.getRequest().getSession(true).setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+            attr.getRequest().getSession(true).setAttribute("SPRING_SECURITY_CONTEXT", username);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response.put("message","Грешно потребителско име или парола!");
@@ -95,16 +96,17 @@ public class DoctorController {
     @GetMapping("/")
     public ResponseEntity<?> home(){
         HashMap<String, Object> response = new HashMap<>();
-        String authUsername = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (authUsername.equals("anonymousUser")) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authUser = securityContext.getAuthentication();
+        if (authUser.getName() == null || authUser.getName().equals("anonymousUser")) {
             response.put("message","Не сте влезли в профила си!");
-            response.put("doctor", authUsername);
+            response.put("doctor", authUser);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } else {
             response.put("message","Начална страница");
-            response.put("doctor", authUsername);
+            response.put("doctor", authUser);
         }
-        response.put("doctor", authUsername);
+        response.put("doctor", authUser);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

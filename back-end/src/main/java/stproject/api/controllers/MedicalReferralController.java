@@ -3,8 +3,12 @@ package stproject.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import stproject.api.entities.MedicalReferral;
+import stproject.api.repositories.DoctorRepository;
 import stproject.api.repositories.DoctorsSpecialistsRepository;
 import stproject.api.repositories.MedicalReferralRepository;
 
@@ -21,6 +25,8 @@ public class MedicalReferralController {
     MedicalReferralRepository medicalReferralRepository;
     @Autowired
     DoctorsSpecialistsRepository doctorsSpecialistsRepository;
+    @Autowired
+    DoctorRepository doctorRepository;
 
     @PostMapping("/save")
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
@@ -55,10 +61,18 @@ public class MedicalReferralController {
         if (uniqueReferralNumber != null) {
             medicalReferral.setUniqueReferralNumber(uniqueReferralNumber);
         }
-
+        Map<String, Object> response = new HashMap<>();
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authUser = securityContext.getAuthentication();
+        if (authUser.getName() == null || authUser.getName().equals("anonymousUser")) {
+            response.put("message","Не сте влезли в профила си!");
+            response.put("doctor", authUser);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        medicalReferral.setDoctor(doctorRepository.findByUsername(authUser.getName()));
+        
         medicalReferral = medicalReferralRepository.save(medicalReferral);
 
-        Map<String, Object> response = new HashMap<>();
         response.put("medicalReferralId", medicalReferral.getId());
         response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);
