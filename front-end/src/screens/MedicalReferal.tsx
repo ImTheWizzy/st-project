@@ -3,10 +3,11 @@ import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
-
+import { useSession } from '../hooks/useAuth';
 
 function Prescription() {
     const url = "http://localhost:8081/medicalReferral/save"
+    const { user } = useSession();
     const [data, setData] = useState({
         doctorType: "",
         comment: "",
@@ -29,6 +30,8 @@ function Prescription() {
                     uniqueReferralNumber: data.uniqueReferralNumber,
                     firstName: data.firstName,
                     lastName: data.lastName,
+                    doctorUser: user,
+
 
                 }
         }).then(res => {
@@ -42,7 +45,6 @@ function Prescription() {
         // @ts-ignore
         newData[e.target.id] = e.target.value
         setData(newData)
-        // console.log(newData);
     }
 
     return (<>

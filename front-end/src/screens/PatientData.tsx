@@ -3,9 +3,11 @@ import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
+import { useSession } from '../hooks/useAuth';
 
 function PatientData() {
     const url = "http://localhost:8081/patient/save"
+    const { user } = useSession();
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -32,6 +34,7 @@ function PatientData() {
                     age: data.age,
                     genderType: data.genderType,
                     additionalInfo: data.additionalInfo,
+                    doctorUser: user
 
                 }
         }).then(res => {

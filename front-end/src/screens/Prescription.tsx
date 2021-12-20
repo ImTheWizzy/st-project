@@ -3,10 +3,11 @@ import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
-
+import { useSession } from '../hooks/useAuth';
 
 function Prescription() {
     const url = "http://localhost:8081/prescription/save"
+    const { user } = useSession();
     const [data, setData] = useState({
         medicine: "",
         comment: "",
@@ -17,7 +18,7 @@ function Prescription() {
 
     })
 
-    function submit(e: React.FormEvent<HTMLFormElement>) {
+    function submit(e:any) {
 
         e.preventDefault();
         console.log
@@ -32,7 +33,8 @@ function Prescription() {
                     date: data.date,
                     uniquePrescriptionNumber: data.uniquePrescriptionNumber,
                     firstName: data.firstName,
-                    lastName: data.lastName
+                    lastName: data.lastName,
+                    doctorUser: user
 
                 }
         }).then(res => {
@@ -46,7 +48,6 @@ function Prescription() {
         // @ts-ignore
         newData[e.target.id] = e.target.value
         setData(newData)
-        // console.log(newData);
     }
 
     return (<>
