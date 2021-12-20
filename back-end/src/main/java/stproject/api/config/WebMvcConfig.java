@@ -21,11 +21,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
 
-    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration config = new CorsConfiguration();
-    source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
-
-    return source;
-}
+        return source;
+    }
 }

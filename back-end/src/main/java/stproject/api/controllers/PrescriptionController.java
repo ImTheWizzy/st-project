@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import stproject.api.entities.Prescription;
+import stproject.api.repositories.DoctorRepository;
 import stproject.api.repositories.PrescriptionRepository;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ public class PrescriptionController {
 
     @Autowired
     PrescriptionRepository prescriptionRepository;
+    @Autowired
+    DoctorRepository doctorRepository;
 
     @PostMapping("/save")
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
@@ -27,6 +30,7 @@ public class PrescriptionController {
                                           @RequestParam(required = false) String comment,
                                           @RequestParam(required = false) String date,
                                           @RequestParam(required = false) String uniquePrescriptionNumber,
+                                          String doctorUser,
                                           Prescription prescription) {
 
 //        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
@@ -47,6 +51,9 @@ public class PrescriptionController {
         }
         if (uniquePrescriptionNumber != null) {
             prescription.setUniquePrescriptionNumber(uniquePrescriptionNumber);
+        }
+        if (doctorUser != null) {
+            prescription.setDoctor(doctorRepository.findByUsername(doctorUser));
         }
 
         prescription = prescriptionRepository.save(prescription);

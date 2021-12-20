@@ -51,8 +51,6 @@ public class DoctorController {
         HashMap<String, Object> response = new HashMap<>();
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken("anonymousUser", null);
         SecurityContextHolder.getContext().setAuthentication(authRequest);
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        attr.getRequest().getSession(true).removeAttribute("SPRING_SECURITY_CONTEXT");
 
         response.put("message","Излязохте от профила си!");
         return new ResponseEntity<>(response, HttpStatus.OK);
