@@ -12,6 +12,8 @@ function Prescription() {
         comment: "",
         date: "",
         uniquePrescriptionNumber: "",
+        firstName: "",
+        lastName:"",
 
     })
 
@@ -29,6 +31,8 @@ function Prescription() {
                     comment: data.comment,
                     date: data.date,
                     uniquePrescriptionNumber: data.uniquePrescriptionNumber,
+                    firstName: data.firstName,
+                    lastName: data.lastName
 
                 }
         }).then(res => {
@@ -37,7 +41,7 @@ function Prescription() {
         })
     }
 
-    function handle(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function handle(e:any) {
         const newData = {...data}
         // @ts-ignore
         newData[e.target.id] = e.target.value
@@ -76,10 +80,22 @@ function Prescription() {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="uniquePrescriptionNumber">
                             <Form.Label>Prescription Number</Form.Label>
-                            <Form.Control type="text" placeholder="uniquePrescriptionNumber"
+                            <Form.Control type="text" placeholder="prescription number"
                                           value={data.uniquePrescriptionNumber}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
+                            <Form.Group className="mb-3" controlId="firstName">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control type="text" placeholder="first Name"
+                                              value={data.firstName}
+                                              onChange={(e) => handle(e)}/>
+                            </Form.Group>
+                                <Form.Group className="mb-3" controlId="lastName">
+                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Control type="text" placeholder="last Name"
+                                                  value={data.lastName}
+                                                  onChange={(e) => handle(e)}/>
+                                </Form.Group>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>

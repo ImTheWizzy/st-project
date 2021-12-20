@@ -58,6 +58,7 @@ class Patient extends React.Component {
             }
         }
     }
+
     render() {
         const {error, patients} = this.state;
 
@@ -78,7 +79,11 @@ class Patient extends React.Component {
                     <main>
                         <div>
                             <br/>
-                            <Button variant="primary" href="/patientdata">Add Patient </Button>
+                            <Button variant="primary" href="/patientdata">Add Patient </Button> {' '}
+                            <Button variant="outline-primary" href="/prescription"> Add
+                                prescription </Button> {' '}
+                            <Button variant="outline-primary" href="/medicalreferral"> Add
+                                medical referral </Button> {' '}
                         </div>
                         <br/>
 
@@ -97,10 +102,9 @@ class Patient extends React.Component {
 
                         </InputGroup>
 
-                        <Table striped bordered hover size="sm">
+                        <Table striped bordered hover size="sm" >
                             <thead>
                             <tr>
-                                <th>#id</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>EGN</th>
@@ -109,18 +113,14 @@ class Patient extends React.Component {
                                 <th>Birth date</th>
                                 <th>Age</th>
                                 <th>Gender</th>
-                                {/*<th>Info</th>*/}
                                 <th>Delete</th>
-                                <th>Add Prescription</th>
-                                <th>Add Medical Referral</th>
-                                <th>View Patient</th>
+                                <th>View And Edit Patient</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             {patients.map((patient: any) => (
                                 <tr key={patient.id}>
-                                    <td>{patient.id}</td>
                                     <td>{patient.firstName}</td>
                                     <td>{patient.lastName}</td>
                                     <td>{patient.egn}</td>
@@ -129,20 +129,13 @@ class Patient extends React.Component {
                                     <td>{patient.birthDate}</td>
                                     <td>{patient.age}</td>
                                     <td>{patient.gender?.genderType}</td>
-                                    {/*<td>{patient.additionalInfo}</td>*/}
                                     <td><Button variant="outline-danger" color="black"
                                                 onClick={(e) => this.removeData(patient.id)}>Delete </Button></td>
-                                    <td><Button variant="outline-primary" href="/prescription"> Add
-                                        prescription </Button></td>
-                                    <td><Button variant="outline-primary" href="/medicalreferral"> Add
-                                        medical referal </Button></td>
-                                    <td><Link to={`/patientTab/${patient.id}`} > View </Link></td>
-
+                                    <td><Link to={`/patientTab/${patient.id}`} > View and Edit </Link></td>
                                 </tr>
                             ))}
                             </tbody>
                         </Table>
-
                     </main>
                 </div>
             )
