@@ -3,18 +3,21 @@ import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
-
+import { useSession } from '../hooks/useAuth';
 
 function Prescription() {
     const url = "http://localhost:8081/medicalReferral/save"
+    const { user } = useSession();
     const [data, setData] = useState({
         doctorType: "",
         comment: "",
         date: "",
         uniqueReferralNumber: "",
+        firstName: "",
+        lastName: "",
 
     })
-    function submit(e: React.FormEvent<HTMLFormElement>) {
+    function submit(e:any) {
 
         e.preventDefault();
 
@@ -25,6 +28,10 @@ function Prescription() {
                     comment: data.comment,
                     date: data.date,
                     uniqueReferralNumber: data.uniqueReferralNumber,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    doctorUser: user,
+
 
                 }
         }).then(res => {
@@ -33,12 +40,11 @@ function Prescription() {
         })
     }
 
-    function handle(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function handle(e:any) {
         const newData = {...data}
         // @ts-ignore
         newData[e.target.id] = e.target.value
         setData(newData)
-        // console.log(newData);
     }
 
     return (<>
@@ -72,10 +78,22 @@ function Prescription() {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="uniqueReferralNumber">
                             <Form.Label>Referral Number</Form.Label>
-                            <Form.Control type="text" placeholder="uniqueReferralNumber"
+                            <Form.Control type="text" placeholder="referral number"
                                           value={data.uniqueReferralNumber}
                                           onChange={(e) => handle(e)}/>
                         </Form.Group>
+                            <Form.Group className="mb-3" controlId="firstName">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control type="text" placeholder="first Name"
+                                              value={data.firstName}
+                                              onChange={(e) => handle(e)}/>
+                            </Form.Group>
+                                <Form.Group className="mb-3" controlId="lastName">
+                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Control type="text" placeholder="last Name"
+                                                  value={data.lastName}
+                                                  onChange={(e) => handle(e)}/>
+                                </Form.Group>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
