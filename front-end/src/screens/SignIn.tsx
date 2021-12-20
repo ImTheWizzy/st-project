@@ -33,7 +33,7 @@ const SignIn = () => {
         setToastVariant("success");
         setToastMessage("Successful sign in!");
 
-        response.doctor && handleSetSession(response.doctor);
+        response.doctor && handleSetSession(response.userAuth);
 
         window.location.reload();
       } catch (error) {

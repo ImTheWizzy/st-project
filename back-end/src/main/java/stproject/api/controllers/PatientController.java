@@ -3,9 +3,6 @@ package stproject.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import stproject.api.entities.Patient;
 import stproject.api.repositories.DoctorRepository;
@@ -62,6 +59,7 @@ public class PatientController {
                                           @RequestParam(required = false) String birthDate,
                                           @RequestParam(required = false) Integer age,
                                           @RequestParam(required = false) String additionalInfo,
+                                          String doctorUser,
                                           Patient patient) {
 
        // Patient patient = patientRepository.findPatientById(id);
@@ -92,18 +90,13 @@ public class PatientController {
         if (additionalInfo != null) {
             patient.setAdditionalInfo(additionalInfo);
         }
-        Map<String, Object> response = new HashMap<>();
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authUser = securityContext.getAuthentication();
-        if (authUser.getName() == null || authUser.getName().equals("anonymousUser")) {
-            response.put("message","Не сте влезли в профила си!");
-            response.put("doctor", authUser);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        if (doctorUser != null) {
+            patient.setDoctor(doctorRepository.findByUsername(doctorUser));
         }
-        patient.setDoctor(doctorRepository.findByUsername(authUser.getName()));
 
         patient = patientRepository.save(patient);
 
+        Map<String, Object> response = new HashMap<>();
         response.put("patientId", patient.getId());
         response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);

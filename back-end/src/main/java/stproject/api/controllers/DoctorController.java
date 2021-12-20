@@ -35,11 +35,10 @@ public class DoctorController {
         if (doctor != null && passwordEncoder.matches(password, doctor.getPassword())){
             response.put("message","Влязохте успрешно!");
             response.put("doctor", doctor.getFirstName() + " " + doctor.getLastName());
+            response.put("userAuth", username);
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
             SecurityContext securityContext = SecurityContextHolder.getContext();
             securityContext.setAuthentication(authRequest);
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            attr.getRequest().getSession(true).setAttribute("SPRING_SECURITY_CONTEXT", username);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response.put("message","Грешно потребителско име или парола!");
@@ -52,8 +51,6 @@ public class DoctorController {
         HashMap<String, Object> response = new HashMap<>();
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken("anonymousUser", null);
         SecurityContextHolder.getContext().setAuthentication(authRequest);
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        attr.getRequest().getSession(true).removeAttribute("SPRING_SECURITY_CONTEXT");
 
         response.put("message","Излязохте от профила си!");
         return new ResponseEntity<>(response, HttpStatus.OK);
