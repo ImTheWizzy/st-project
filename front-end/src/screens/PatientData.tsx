@@ -3,9 +3,11 @@ import Button from 'react-bootstrap/Button'
 import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
+import { useSession } from '../hooks/useAuth';
 
 function FormExample() {
     const url = "http://localhost:8081/patient/save"
+    const { user } = useSession();
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -15,7 +17,7 @@ function FormExample() {
         birthDate: "",
         age: "",
         genderType: "",
-        additionalInfo: "",
+        additionalInfo: ""
     })
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -32,7 +34,7 @@ function FormExample() {
                     age: data.age,
                     genderType: data.genderType,
                     additionalInfo: data.additionalInfo,
-
+                    doctorUser: user
                 }
         }).then(res => {
 

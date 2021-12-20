@@ -37,6 +37,7 @@ public class MedicalReferralController {
                                           @RequestParam(required = false) String comment,
                                           @RequestParam(required = false) String date,
                                           @RequestParam(required = false) String uniqueReferralNumber,
+                                          String doctorUser,
                                           MedicalReferral medicalReferral) {
 
         //MedicalReferral medicalReferral = medicalReferralRepository.findMedicalReferralBy(id);
@@ -61,18 +62,13 @@ public class MedicalReferralController {
         if (uniqueReferralNumber != null) {
             medicalReferral.setUniqueReferralNumber(uniqueReferralNumber);
         }
-        Map<String, Object> response = new HashMap<>();
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authUser = securityContext.getAuthentication();
-        if (authUser.getName() == null || authUser.getName().equals("anonymousUser")) {
-            response.put("message","Не сте влезли в профила си!");
-            response.put("doctor", authUser);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        if (doctorUser != null) {
+            medicalReferral.setDoctor(doctorRepository.findByUsername(doctorUser));
         }
-        medicalReferral.setDoctor(doctorRepository.findByUsername(authUser.getName()));
         
         medicalReferral = medicalReferralRepository.save(medicalReferral);
 
+        Map<String, Object> response = new HashMap<>();
         response.put("medicalReferralId", medicalReferral.getId());
         response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);
