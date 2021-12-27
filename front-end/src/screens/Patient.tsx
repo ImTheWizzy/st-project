@@ -6,6 +6,7 @@ import axios from "axios";
 import patientdata from "./patient-service";
 import {Link} from "react-router-dom";
 
+
 class Patient extends React.Component {
     state = {
         error: null,
@@ -14,8 +15,12 @@ class Patient extends React.Component {
         searchValue: "",
     }
     componentDidMount() {
-        axios.get(`http://localhost:8081/patient/all`)
-            .then(res => {
+        axios.get(`http://localhost:8081/patient/all`,{
+            params:
+                {
+                    doctorUser: localStorage.getItem("session")
+                }
+        }).then(res => {
                 const patients = res.data;
                 patientdata.patientsArr = res.data;
                 this.setState({patients});
