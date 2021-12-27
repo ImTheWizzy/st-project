@@ -64,8 +64,7 @@ class PatientTab extends React.Component<{}, MyState> {
                 birthDate: this.state.patient?.birthDate,
                 age: this.state.patient?.age,
                 genderType: this.state.patient?.genderType,
-                additionalInfo: this.state.patient?.additionalInfo
-
+                additionalInfo: this.state.patient?.additionalInfo,
             }
         )
         axios.post(`http://localhost:8081/patient/save`, null,
@@ -81,8 +80,8 @@ class PatientTab extends React.Component<{}, MyState> {
                         birthDate: this.state.patient?.birthDate,
                         age: this.state.patient?.age,
                         genderType: this.state.patient?.gender?.genderType,
-                        additionalInfo: this.state.patient?.additionalInfo
-
+                        additionalInfo: this.state.patient?.additionalInfo,
+                        doctorUser: localStorage.getItem("session")
                     }
             }).then(res => {
 
