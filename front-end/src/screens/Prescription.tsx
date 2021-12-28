@@ -17,29 +17,11 @@ function Prescription() {
     firstName: "",
     lastName: "",
   });
+  const [email, setEmail] = useState<string>("");
 
   function submit(e: any) {
     e.preventDefault();
     console.log(data);
-
-    emailjs.send(
-      "gmail",
-      "template_u80w09h",
-      {
-        name:
-          data.firstName && data.lastName
-            ? data.firstName + " " + data.lastName
-            : "",
-        firstName: data.firstName,
-        lastName: data.lastName,
-        medicine: data.medicine,
-        comment: data.comment,
-        uniquePrescriptionNumber: data.uniquePrescriptionNumber,
-        date: data.date,
-        email: "martintodo9@gmail.com",
-      },
-      "user_Ggex7Dj28IYlVlg2dcjn2"
-    );
 
     axios
       .post(url, null, {
@@ -55,6 +37,21 @@ function Prescription() {
       })
       .then((res) => {
         console.log(res.data);
+
+        emailjs.send(
+          "gmail",
+          "template_u80w09h",
+          {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            medicine: data.medicine,
+            comment: data.comment,
+            uniquePrescriptionNumber: data.uniquePrescriptionNumber,
+            date: data.date,
+            email: email,
+          },
+          "user_Ggex7Dj28IYlVlg2dcjn2"
+        );
       });
   }
 
@@ -130,6 +127,15 @@ function Prescription() {
                 placeholder="last Name"
                 value={data.lastName}
                 onChange={(e) => handle(e)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
