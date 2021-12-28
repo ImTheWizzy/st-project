@@ -24,8 +24,9 @@ public class PatientController {
     DoctorRepository doctorRepository;
 
     @GetMapping("/all")
-    public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public List<Patient> getAllPatients(String doctorUser) {
+        Long doctorId = doctorRepository.findByUsername(doctorUser).getId();
+        return patientRepository.getPatientsByDoctor(doctorId);
     }
 
     @GetMapping("/search/firstName")
