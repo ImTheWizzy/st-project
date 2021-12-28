@@ -40,7 +40,6 @@ public class MedicalReferralController {
                                           String doctorUser,
                                           MedicalReferral medicalReferral) {
 
-        //MedicalReferral medicalReferral = medicalReferralRepository.findMedicalReferralBy(id);
         if (firstName != null) {
             medicalReferral.setFirstName(firstName);
         }

@@ -33,7 +33,6 @@ public class PrescriptionController {
                                           String doctorUser,
                                           Prescription prescription) {
 
-//        Prescription prescription =prescriptionRepository.findPrescriptionById(id);
         if (firstName != null) {
             prescription.setFirstName(firstName);
         }
