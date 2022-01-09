@@ -6,7 +6,7 @@ import {Col, Row} from "react-bootstrap";
 import { useSession } from '../hooks/useAuth';
 
 function PatientData() {
-    const url = "http://localhost:8081/patient/save"
+    const url = `${process.env.REACT_APP_REMOTE_URL}/patient/save`
     const { user } = useSession();
     const [data, setData] = useState({
         firstName: "",

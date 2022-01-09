@@ -67,7 +67,7 @@ class PatientTab extends React.Component<{}, MyState> {
                 additionalInfo: this.state.patient?.additionalInfo,
             }
         )
-        axios.post(`http://localhost:8081/patient/save`, null,
+        axios.post(`${process.env.REACT_APP_REMOTE_URL}/patient/save`, null,
             {
                 params:
                     {

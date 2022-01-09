@@ -15,7 +15,7 @@ class Patient extends React.Component {
         searchValue: "",
     }
     componentDidMount() {
-        axios.get(`http://localhost:8081/patient/all`,{
+        axios.get(`${process.env.REACT_APP_REMOTE_URL}/patient/all`,{
             params:
                 {
                     doctorUser: localStorage.getItem("session")
@@ -27,7 +27,7 @@ class Patient extends React.Component {
             })
     };
     removeData = (id: any) => {
-        axios.delete(`http://localhost:8081/patient/delete?id=${id}`)
+        axios.delete(`${process.env.REACT_APP_REMOTE_URL}/patient/delete?id=${id}`)
             .then(res => {
                 debugger
                 const newPatients = this.state.patients.filter((patient: any) => patient.id !== id)
@@ -42,7 +42,7 @@ class Patient extends React.Component {
         e.preventDefault();
 
         if (this.state.searchType === "EGN") {
-            axios.get(`http://localhost:8081/patient/search/egn?egn=${e.target.value}`)
+            axios.get(`${process.env.REACT_APP_REMOTE_URL}/patient/search/egn?egn=${e.target.value}`)
                 .then(res => {
 
                     this.setState({patients: [res.data]});
@@ -52,7 +52,7 @@ class Patient extends React.Component {
             });
         } else {
             if (this.state.searchType === "FirstName") {
-                axios.get(`http://localhost:8081/patient/search/firstName?firstName=${e.target.value}`)
+                axios.get(`${process.env.REACT_APP_REMOTE_URL}/patient/search/firstName?firstName=${e.target.value}`)
                     .then(res => {
 
                         this.setState({patients: [res.data]});

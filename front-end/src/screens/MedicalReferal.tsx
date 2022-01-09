@@ -7,7 +7,7 @@ import { useSession } from "../hooks/useAuth";
 import emailjs from "emailjs-com";
 
 function Prescription() {
-  const url = "http://localhost:8081/medicalReferral/save";
+  const url = `${process.env.REACT_APP_REMOTE_URL}/medicalReferral/save`;
   const { user } = useSession();
   const [data, setData] = useState({
     doctorType: "",
