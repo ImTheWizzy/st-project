@@ -10,6 +10,7 @@ function PatientData() {
     const navigate = useNavigate();
     const url = `${process.env.REACT_APP_REMOTE_URL}/patient/save`
     const { user } = useSession();
+    const [error, setError] = useState<string | undefined>();
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -22,8 +23,21 @@ function PatientData() {
         additionalInfo: "",
     })
 
+    function validate() {
+        for (var [key, value] of Object.entries(data)) {
+            if ((value === undefined || value === "")&& key !== "additionalInfo") {
+              setError('Please enter all input field');
+              return false;
+            }
+          }
+        return true;
+    }
+
     function submit(e:any) {
         e.preventDefault();
+        if (!validate()) {
+            return;
+        }
         axios.post(url, null,{
             params:
                 {
@@ -61,6 +75,7 @@ function PatientData() {
                     <Row className="d-flex justify-content-center align-items-start">
                         <Col xs="4" className="bg-theme-dark rounded">
                             <h1 className="text-center">Add Patient</h1>
+                            {error && <h4 className="red-text text-center">{error}</h4>}
                         </Col>
                     </Row>
                 </header>
