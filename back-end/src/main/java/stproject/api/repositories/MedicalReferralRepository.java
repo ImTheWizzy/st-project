@@ -7,6 +7,6 @@ import stproject.api.entities.MedicalReferral;
 import java.util.List;
 
 public interface MedicalReferralRepository extends JpaRepository<MedicalReferral,Long> {
-    @Query("SELECT m FROM MedicalReferral WHERE m.patient_id = :patient_id")
-    List<MedicalReferral> findMedicalReferralsByPatientId(Integer patient_id);
+    @Query("SELECT m FROM MedicalReferral m WHERE (m.patient.id) = :patient_id")
+    List<MedicalReferral> findMedicalReferralsByPatientId(Long patient_id);
 }

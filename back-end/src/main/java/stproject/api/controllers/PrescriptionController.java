@@ -26,14 +26,13 @@ public class PrescriptionController {
     DoctorRepository doctorRepository;
 
     @GetMapping("/patient/prescriptions")
-    public ResponseEntity<?> getPrescriptions(@RequestParam Integer patient_id) {
+    public ResponseEntity<?> getPrescriptions(@RequestParam Long patient_id) {
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions = prescriptionRepository.findPrescriptionsByPatientId(patient_id);
 
 
         Map<String, Object> response = new HashMap<>();
         response.put("prescriptions", prescriptions);
-        response.put("message", "Рецепти");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

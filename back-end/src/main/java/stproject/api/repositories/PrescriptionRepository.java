@@ -7,6 +7,6 @@ import stproject.api.entities.Prescription;
 import java.util.List;
 
 public interface PrescriptionRepository extends JpaRepository<Prescription,Long> {
-    @Query("SELECT p FROM Prescription WHERE p.patient_id = :patient_id")
-    List<Prescription> findPrescriptionsByPatientId(Integer patient_id);
+    @Query("SELECT p FROM Prescription p WHERE (p.patient.id) = :patient_id")
+    List<Prescription> findPrescriptionsByPatientId(Long patient_id);
 }

@@ -37,11 +37,15 @@ public class Prescription {
     @Column(name = "last_name")
     private String lastName;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
     public Prescription(){
 
     }
 
-    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, String firstName, String lastName) {
+    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, String firstName, String lastName, Patient patient) {
         this.id = id;
         this.medicine = medicine;
         this.comment = comment;
@@ -50,6 +54,15 @@ public class Prescription {
         this.doctor = doctor;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.patient = patient;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Long getId() {

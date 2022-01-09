@@ -31,14 +31,13 @@ public class MedicalReferralController {
     DoctorRepository doctorRepository;
 
     @GetMapping("/patient/referrals")
-    public ResponseEntity<?> getMedicalReferralByUserId(@RequestParam Integer patient_id) {
+    public ResponseEntity<?> getMedicalReferralsByUserId(@RequestParam Long patient_id) {
         List<MedicalReferral> referrals = new ArrayList<>();
         referrals = medicalReferralRepository.findMedicalReferralsByPatientId(patient_id);
 
 
         Map<String, Object> response = new HashMap<>();
         response.put("referrals", referrals);
-        response.put("message", "Направления");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

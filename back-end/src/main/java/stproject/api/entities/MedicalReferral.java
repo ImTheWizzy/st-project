@@ -37,10 +37,14 @@ public class MedicalReferral {
     @Column(name = "egn")
     private String egn;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
     public MedicalReferral() {
     }
 
-    public MedicalReferral(Long id, String comment, String date, String uniqueReferralNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, String firstName, String lastName, String egn) {
+    public MedicalReferral(Long id, String comment, String date, String uniqueReferralNumber, DoctorsSpecialists doctorSpecialist, Doctor doctor, String firstName, String lastName, String egn, Patient patient) {
         this.id = id;
         this.comment = comment;
         this.date = date;
@@ -50,6 +54,15 @@ public class MedicalReferral {
         this.firstName = firstName;
         this.lastName = lastName;
         this.egn = egn;
+        this.patient = patient;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Long getId() {
