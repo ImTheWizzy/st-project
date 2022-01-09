@@ -29,7 +29,7 @@ class PatientTab extends React.Component<{}, MyState> {
         }
     }
 
-    patientsArray = [];
+    patientsArray: any[] = [];
     patient: any;
 
     componentDidMount() {
@@ -46,9 +46,17 @@ class PatientTab extends React.Component<{}, MyState> {
         this.setState(
             {
                 ...this.state,
-                IsEditMode: true
+                IsEditMode: !this.state.IsEditMode
             }
         )
+    }
+
+    updateLocalPatient() {
+        this.patientsArray = [this.state.patient];
+        this.setState({
+            ...this.state,
+            patient: this.patientsArray[0]
+        })
     }
 
     submit(e: any) {
@@ -84,8 +92,11 @@ class PatientTab extends React.Component<{}, MyState> {
                         doctorUser: localStorage.getItem("session")
                     }
             }).then(res => {
-
-            console.log(res.data)
+                console.log(res.data)
+                if(res.data.message) {
+                    this.updateLocalPatient();
+                    alert(res.data.message);
+                }
         })
     }
 
