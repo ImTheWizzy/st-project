@@ -12,7 +12,9 @@ import stproject.api.repositories.DoctorRepository;
 import stproject.api.repositories.DoctorsSpecialistsRepository;
 import stproject.api.repositories.MedicalReferralRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -27,6 +29,19 @@ public class MedicalReferralController {
     DoctorsSpecialistsRepository doctorsSpecialistsRepository;
     @Autowired
     DoctorRepository doctorRepository;
+
+    @GetMapping("/patient/referrals")
+    public ResponseEntity<?> getMedicalReferralByUserId(@RequestParam Integer patient_id) {
+        List<MedicalReferral> referrals = new ArrayList<>();
+        referrals = medicalReferralRepository.findMedicalReferralsByPatientId(patient_id);
+
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("referrals", referrals);
+        response.put("message", "Направления");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @PostMapping("/save")
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,

@@ -1,5 +1,7 @@
 package stproject.api.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +20,7 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
     @Column(name = "egn")
     private String egn;
 
