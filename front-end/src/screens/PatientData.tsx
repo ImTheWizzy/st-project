@@ -4,8 +4,10 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
 import { useSession } from '../hooks/useAuth';
+import { useNavigate } from 'react-router';
 
 function PatientData() {
+    const navigate = useNavigate();
     const url = `${process.env.REACT_APP_REMOTE_URL}/patient/save`
     const { user } = useSession();
     const [data, setData] = useState({
@@ -38,8 +40,11 @@ function PatientData() {
 
                 }
         }).then(res => {
-
-            console.log(res.data)
+            console.log(res.data);
+            if(res.data.message) {
+                alert(res.data.message);
+                navigate('/patient');
+            }
         })
     }
 
