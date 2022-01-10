@@ -20,8 +20,6 @@ function Prescription() {
     comment: "",
     date: "",
     uniquePrescriptionNumber: "",
-    firstName: "",
-    lastName: "",
     patient_id: "",
     results: "",
   });
@@ -49,8 +47,6 @@ function Prescription() {
           comment: data.comment,
           date: data.date,
           uniquePrescriptionNumber: data.uniquePrescriptionNumber,
-          firstName: data.firstName,
-          lastName: data.lastName,
           doctorUser: user,
           patient_id: data.patient_id,
           results: data.results,
@@ -69,8 +65,6 @@ function Prescription() {
           "gmail",
           "template_u80w09h",
           {
-            firstName: data.firstName,
-            lastName: data.lastName,
             medicine: data.medicine,
             comment: data.comment,
             uniquePrescriptionNumber: data.uniquePrescriptionNumber,
@@ -144,7 +138,7 @@ function Prescription() {
               id="egn-all-patients"
               labelKey={'egn'}
               options={allPatients}
-              placeholder="Default select example"
+              placeholder="Select Patient EGN"
               onChange={(selected: any)=>{
                 console.log('selected', selected);
                 setData({
