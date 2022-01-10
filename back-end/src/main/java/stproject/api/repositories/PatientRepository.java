@@ -20,7 +20,4 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
 
    @Query("SELECT p FROM Patient p WHERE (p.egn)= :egn")
    Optional<Patient> findPatientByEgn(String egn);
-
-
-
 }

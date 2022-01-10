@@ -27,29 +27,46 @@ public class Prescription {
     @Column(name = "unique_prescription_number")
     private String uniquePrescriptionNumber;
 
+    @Column(name= "results")
+    private String results;
+
     @ManyToOne
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     public Prescription(){
 
     }
 
-    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, String firstName, String lastName) {
+    public Prescription(Long id, String medicine, String comment, String date, String uniquePrescriptionNumber, Doctor doctor, Patient patient, String results) {
         this.id = id;
         this.medicine = medicine;
         this.comment = comment;
         this.date = date;
         this.uniquePrescriptionNumber = uniquePrescriptionNumber;
         this.doctor = doctor;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.patient = patient;
+        this.results = results;
+    }
+
+    public String getResults() {
+        return results;
+    }
+
+    public void setResults(String results) {
+        this.results = results;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Long getId() {
@@ -98,21 +115,5 @@ public class Prescription {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 }

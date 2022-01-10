@@ -4,10 +4,13 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
 import { useSession } from '../hooks/useAuth';
+import { useNavigate } from 'react-router';
 
 function PatientData() {
-    const url = "http://localhost:8081/patient/save"
+    const navigate = useNavigate();
+    const url = `${process.env.REACT_APP_REMOTE_URL}/patient/save`
     const { user } = useSession();
+    const [error, setError] = useState<string | undefined>();
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -20,8 +23,21 @@ function PatientData() {
         additionalInfo: "",
     })
 
+    function validate() {
+        for (var [key, value] of Object.entries(data)) {
+            if ((value === undefined || value === "")&& key !== "additionalInfo") {
+              setError('Please enter all input field');
+              return false;
+            }
+          }
+        return true;
+    }
+
     function submit(e:any) {
         e.preventDefault();
+        if (!validate()) {
+            return;
+        }
         axios.post(url, null,{
             params:
                 {
@@ -38,8 +54,11 @@ function PatientData() {
 
                 }
         }).then(res => {
-
-            console.log(res.data)
+            console.log(res.data);
+            if(res.data.message) {
+                alert(res.data.message);
+                navigate('/patient');
+            }
         })
     }
 
@@ -56,6 +75,7 @@ function PatientData() {
                     <Row className="d-flex justify-content-center align-items-start">
                         <Col xs="4" className="bg-theme-dark rounded">
                             <h1 className="text-center">Add Patient</h1>
+                            {error && <h4 className="red-text text-center">{error}</h4>}
                         </Col>
                     </Row>
                 </header>
