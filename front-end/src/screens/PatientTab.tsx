@@ -29,7 +29,7 @@ class PatientTab extends React.Component<{}, MyState> {
         }
     }
 
-    patientsArray = [];
+    patientsArray: any[] = [];
     patient: any;
 
     componentDidMount() {
@@ -46,9 +46,17 @@ class PatientTab extends React.Component<{}, MyState> {
         this.setState(
             {
                 ...this.state,
-                IsEditMode: true
+                IsEditMode: !this.state.IsEditMode
             }
         )
+    }
+
+    updateLocalPatient() {
+        this.patientsArray = [this.state.patient];
+        this.setState({
+            ...this.state,
+            patient: this.patientsArray[0]
+        })
     }
 
     submit(e: any) {
@@ -67,7 +75,7 @@ class PatientTab extends React.Component<{}, MyState> {
                 additionalInfo: this.state.patient?.additionalInfo,
             }
         )
-        axios.post(`http://localhost:8081/patient/save`, null,
+        axios.post(`${process.env.REACT_APP_REMOTE_URL}/patient/save`, null,
             {
                 params:
                     {
@@ -84,8 +92,11 @@ class PatientTab extends React.Component<{}, MyState> {
                         doctorUser: localStorage.getItem("session")
                     }
             }).then(res => {
-
-            console.log(res.data)
+                console.log(res.data)
+                if(res.data.message) {
+                    this.updateLocalPatient();
+                    alert(res.data.message);
+                }
         })
     }
 
@@ -154,6 +165,8 @@ class PatientTab extends React.Component<{}, MyState> {
                     </tbody>
                 </Table>
                 <Button onClick={e => this.IsEdit(e)}>Edit</Button>
+                <Button className="mr-2 ml-2">Show Medical Referrals</Button>
+                <Button>Show Prescriptions</Button>
                 <div className="section">
                     {this.state.IsEditMode && (
                         <Form onSubmit={(e) => this.submit(e)}>
