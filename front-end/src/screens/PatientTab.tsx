@@ -165,6 +165,8 @@ class PatientTab extends React.Component<{}, MyState> {
                     </tbody>
                 </Table>
                 <Button onClick={e => this.IsEdit(e)}>Edit</Button>
+                <Button className="mr-2 ml-2">Show Medical Referrals</Button>
+                <Button>Show Prescriptions</Button>
                 <div className="section">
                     {this.state.IsEditMode && (
                         <Form onSubmit={(e) => this.submit(e)}>
