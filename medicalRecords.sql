@@ -360,7 +360,7 @@ COPY public.patient (id, first_name, last_name, egn, address, phone, birth_date,
 23	Yana	Lozanova	0912675614	"Liulin 3"	0867345676	23.05.2009	12	2	Short sight	\N
 24	Tohomir	Petkov	1912432345	"Nadezhda 4"	0878564725	12.12.2019	2	1	Vaccinated for tetanus	\N
 30	Radostin	Popov	004200001	Sofia	080000	12/12/2000	21	1		4
-29	Teodor	Stanishev	0042086281	ul. "Gen.Kazimir Ernrot" 40	0882124358	12/12/2000	21	1	Golqm KUR	4
+29	Teodor	Stanishev	0042086281	ul. "Gen.Kazimir Ernrot" 40	0882124358	12/12/2000	21	1	\N	4
 \.
 
 

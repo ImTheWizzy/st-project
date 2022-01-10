@@ -19,7 +19,6 @@ import java.util.Map;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("prescription")
-
 public class PrescriptionController {
 
     @Autowired
@@ -29,7 +28,7 @@ public class PrescriptionController {
     @Autowired
     PatientRepository patientRepository;
 
-    @GetMapping("/patient/prescriptions")
+    @GetMapping("")
     public ResponseEntity<?> getPrescriptions(@RequestParam Long patient_id) {
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions = prescriptionRepository.findPrescriptionsByPatientId(patient_id);

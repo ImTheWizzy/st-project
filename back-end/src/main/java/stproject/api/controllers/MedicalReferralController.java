@@ -22,7 +22,6 @@ import java.util.Map;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("medicalReferral")
-
 public class MedicalReferralController {
 
     @Autowired
@@ -34,7 +33,7 @@ public class MedicalReferralController {
     @Autowired
     PatientRepository patientRepository;
 
-    @GetMapping("/patient/referrals")
+    @GetMapping("")
     public ResponseEntity<?> getMedicalReferralsByUserId(@RequestParam Long patient_id) {
         List<MedicalReferral> referrals = new ArrayList<>();
         referrals = medicalReferralRepository.findMedicalReferralsByPatientId(patient_id);
