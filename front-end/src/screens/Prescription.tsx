@@ -37,7 +37,9 @@ function Prescription() {
       })
       .then((res) => {
         console.log(res.data);
-
+        if(!email && email !== ''){
+          return;
+        }
         emailjs.send(
           "gmail",
           "template_u80w09h",
