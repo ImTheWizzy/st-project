@@ -137,9 +137,6 @@ CREATE TABLE public.medical_referral (
     unique_referral_number character varying,
     date character varying,
     doctor_id integer,
-    first_name character varying,
-    last_name character varying,
-    egn character varying,
     patient_id integer
 );
 
@@ -344,7 +341,10 @@ COPY public.gender (id, gender_type) FROM stdin;
 -- Data for Name: medical_referral; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.medical_referral (id, doctors_specialists_id, comment, unique_referral_number, date, doctor_id, first_name, last_name, egn, patient_id) FROM stdin;
+COPY public.medical_referral (id, doctors_specialists_id, comment, unique_referral_number, date, doctor_id, patient_id) FROM stdin;
+7	\N	Losho mu e	12123123	12.12.2020	4	\N
+8	\N	Losho mu2	123123	12.12.2020	4	\N
+9	\N	asdasd	123123	12.12.2020	4	29
 \.
 
 
@@ -360,7 +360,7 @@ COPY public.patient (id, first_name, last_name, egn, address, phone, birth_date,
 23	Yana	Lozanova	0912675614	"Liulin 3"	0867345676	23.05.2009	12	2	Short sight	\N
 24	Tohomir	Petkov	1912432345	"Nadezhda 4"	0878564725	12.12.2019	2	1	Vaccinated for tetanus	\N
 30	Radostin	Popov	004200001	Sofia	080000	12/12/2000	21	1		4
-29	Teodor	Stanishev	0042086281	ul. "Gen.Kazimir Ernrot" 40	0882124358	12/12/2000	21	1	Golqm KUR	4
+29	Teodor	Stanishev	0042086281	ul. "Gen.Kazimir Ernrot" 40	0882124358	12/12/2000	21	1	\N	4
 \.
 
 
@@ -401,7 +401,7 @@ SELECT pg_catalog.setval('public.gender_id_seq', 2, true);
 -- Name: medical_referral_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.medical_referral_id_seq', 6, true);
+SELECT pg_catalog.setval('public.medical_referral_id_seq', 9, true);
 
 
 --

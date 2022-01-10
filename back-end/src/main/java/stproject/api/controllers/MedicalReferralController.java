@@ -8,9 +8,11 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import stproject.api.entities.MedicalReferral;
+import stproject.api.entities.Patient;
 import stproject.api.repositories.DoctorRepository;
 import stproject.api.repositories.DoctorsSpecialistsRepository;
 import stproject.api.repositories.MedicalReferralRepository;
+import stproject.api.repositories.PatientRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +22,6 @@ import java.util.Map;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("medicalReferral")
-
 public class MedicalReferralController {
 
     @Autowired
@@ -29,8 +30,10 @@ public class MedicalReferralController {
     DoctorsSpecialistsRepository doctorsSpecialistsRepository;
     @Autowired
     DoctorRepository doctorRepository;
+    @Autowired
+    PatientRepository patientRepository;
 
-    @GetMapping("/patient/referrals")
+    @GetMapping("")
     public ResponseEntity<?> getMedicalReferralsByUserId(@RequestParam Long patient_id) {
         List<MedicalReferral> referrals = new ArrayList<>();
         referrals = medicalReferralRepository.findMedicalReferralsByPatientId(patient_id);
@@ -43,26 +46,13 @@ public class MedicalReferralController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
-                                          @RequestParam(required = false) String firstName,
-                                          @RequestParam(required = false) String lastName,
-                                          @RequestParam(required = false) String egn,
+    public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long patient_id,
                                           @RequestParam(required = false) String doctorType,
                                           @RequestParam(required = false) String comment,
                                           @RequestParam(required = false) String date,
                                           @RequestParam(required = false) String uniqueReferralNumber,
                                           String doctorUser,
                                           MedicalReferral medicalReferral) {
-
-        if (firstName != null) {
-            medicalReferral.setFirstName(firstName);
-        }
-        if (lastName != null) {
-            medicalReferral.setLastName(lastName);
-        }
-        if (egn != null) {
-            medicalReferral.setEgn(egn);
-        }
         if (doctorType != null) {
             medicalReferral.setDoctorSpecialist(doctorsSpecialistsRepository.findDoctorsSpecialistsByDoctorType(doctorType.toLowerCase()));
         }
@@ -78,6 +68,10 @@ public class MedicalReferralController {
         if (doctorUser != null) {
             medicalReferral.setDoctor(doctorRepository.findByUsername(doctorUser));
         }
+        Patient patient = patientRepository.findPatientById(patient_id);
+        if (patient != null) {
+            medicalReferral.setPatient(patient);
+        }
         
         medicalReferral = medicalReferralRepository.save(medicalReferral);
 
@@ -85,7 +79,6 @@ public class MedicalReferralController {
         response.put("medicalReferralId", medicalReferral.getId());
         response.put("message", "Успешно записан!");
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
 
     @DeleteMapping("/delete")
