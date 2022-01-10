@@ -222,9 +222,8 @@ CREATE TABLE public.prescription (
     date character varying,
     unique_prescription_number character varying,
     doctor_id integer,
-    first_name character varying,
-    last_name character varying,
-    patient_id integer
+    patient_id integer,
+    results character varying
 );
 
 
@@ -301,6 +300,7 @@ ALTER TABLE ONLY public.prescription ALTER COLUMN id SET DEFAULT nextval('public
 COPY public.doctor (id, first_name, last_name, username, password, unique_doctor_number) FROM stdin;
 3	Вяра	Паскова	vp	$2a$10$8BSwNuVCBhwLlofniFdEPuQ8F3nFqpornh5qLyHpN.d5J8kBFX8LO	607b5e7c-47b1-44b4-b588-4b8fef695b25
 4	Teodor	Stanishev	teodor.stanishev	$2a$10$eLAErUPxxarYdpB53eyicuQ46vXCkxlH0xskTtQRN/u14S7Jds/iG	00f2544c-8780-41d8-b6c4-ad52bf3a52c4
+5	Radostin	Popov	rado.hirurga	$2a$10$0abQZOAQoUNVAG6GN85osOZi4158epNmuvUDKo1.aVuiznbfx8y02	801f0a39-1e60-4685-8158-9fd43af3a476
 \.
 
 
@@ -368,7 +368,11 @@ COPY public.patient (id, first_name, last_name, egn, address, phone, birth_date,
 -- Data for Name: prescription; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.prescription (id, medicine, comment, date, unique_prescription_number, doctor_id, first_name, last_name, patient_id) FROM stdin;
+COPY public.prescription (id, medicine, comment, date, unique_prescription_number, doctor_id, patient_id, results) FROM stdin;
+8	Aspiring	Losho mu e	12.12.2020	123123123	4	\N	\N
+9	Aspiring	Loshomu3	12.12.2020	123123123	4	\N	Oshte nishto
+10	Aspiring	Loshomu3	12.12.2020	123123123	4	\N	Oshte nishto
+11	Aspiring	Loshomu3	12.12.2020	123123123	4	29	Oshte nishto
 \.
 
 
@@ -376,7 +380,7 @@ COPY public.prescription (id, medicine, comment, date, unique_prescription_numbe
 -- Name: doctor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.doctor_id_seq', 4, true);
+SELECT pg_catalog.setval('public.doctor_id_seq', 5, true);
 
 
 --
@@ -411,7 +415,7 @@ SELECT pg_catalog.setval('public.patient_id_seq', 30, true);
 -- Name: prescription_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.prescription_id_seq', 7, true);
+SELECT pg_catalog.setval('public.prescription_id_seq', 11, true);
 
 
 --
