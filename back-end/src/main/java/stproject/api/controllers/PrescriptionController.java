@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import stproject.api.entities.MedicalReferral;
 import stproject.api.entities.Prescription;
 import stproject.api.repositories.DoctorRepository;
 import stproject.api.repositories.PrescriptionRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -21,6 +24,19 @@ public class PrescriptionController {
     PrescriptionRepository prescriptionRepository;
     @Autowired
     DoctorRepository doctorRepository;
+
+    @GetMapping("/patient/prescriptions")
+    public ResponseEntity<?> getPrescriptions(@RequestParam Long patient_id) {
+        List<Prescription> prescriptions = new ArrayList<>();
+        prescriptions = prescriptionRepository.findPrescriptionsByPatientId(patient_id);
+
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("prescriptions", prescriptions);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     @PostMapping("/save")
     public ResponseEntity<?> saveOrUpdate(@RequestParam(required = false) Long id,
