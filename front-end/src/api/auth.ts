@@ -13,13 +13,13 @@ export interface ISignInData {
 }
 
 export const signUp = async (data: ISignUpData) => {
-  const response = await axios.post("http://localhost:8081/registration", data);
+  const response = await axios.post("http://localhost:8080/registration", data);
 
   return response.data;
 };
 
 export const signIn = async (data: ISignInData) => {
-  const response = await axios.get("http://localhost:8081/login", {
+  const response = await axios.get("http://localhost:8080/login", {
     params: data,
   });
 

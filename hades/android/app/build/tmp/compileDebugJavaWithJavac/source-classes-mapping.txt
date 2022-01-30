@@ -1,0 +1,14 @@
+com/hades/BuildConfig.java
+ com.hades.BuildConfig
+com/hades/ReactNativeFlipper.java
+ com.hades.ReactNativeFlipper
+ com.hades.ReactNativeFlipper$1
+ com.hades.ReactNativeFlipper$2
+ com.hades.ReactNativeFlipper$2$1
+com/hades/MainApplication.java
+ com.hades.MainApplication
+ com.hades.MainApplication$1
+com/hades/MainActivity.java
+ com.hades.MainActivity
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
