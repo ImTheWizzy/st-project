@@ -11,6 +11,7 @@ import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import {LogBox} from 'react-native';
 import AddPatient from './src/screens/AddPatient';
+import ViewPatients from './src/screens/ViewPatients';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -18,6 +19,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   AddPatient: undefined;
+  ViewPatients: undefined;
 };
 
 LogBox.ignoreLogs(['NativeBase:']);
@@ -69,6 +71,12 @@ const App = () => {
             name="AddPatient"
             component={AddPatient}
             options={{...headerOptions, title: 'Add Patient'}}
+          />
+
+          <Stack.Screen
+            name="ViewPatients"
+            component={ViewPatients}
+            options={{...headerOptions, title: 'View Patients'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

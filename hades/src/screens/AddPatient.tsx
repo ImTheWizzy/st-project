@@ -19,7 +19,7 @@ const AddPatient = ({
 
   const handleAddPatient = async () => {
     const user = await AsyncStorage.getItem('user');
-    console.log(user);
+
     try {
       await addPatient({
         firstName,
@@ -31,7 +31,7 @@ const AddPatient = ({
         age,
         genderType: gender,
         additionalInfo: '',
-        doctorUser: 'wizzy',
+        doctorUser: user || '',
       });
 
       navigation.navigate('Home');

@@ -44,6 +44,15 @@ const Home = ({
         }}>
         Create Medical Referral
       </Button>
+
+      <Button
+        width={'3/4'}
+        variant={'ghost'}
+        onPress={() => {
+          navigation.navigate('ViewPatients');
+        }}>
+        View All Patients
+      </Button>
     </VStack>
   );
 };

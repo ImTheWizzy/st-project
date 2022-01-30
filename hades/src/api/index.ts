@@ -49,3 +49,17 @@ export const addPatient = async (data: IPatientData) => {
 
   return response.data;
 };
+
+export const getPatients = async (data: string) => {
+  const response = await axios.get(`${baseUrl}/patient/all`, {
+    params: {doctorUser: data},
+  });
+
+  return response.data;
+};
+
+export const deletePatient = async (id: string) => {
+  const response = await axios.delete(`${baseUrl}/patient/delete?id=${id}`);
+
+  return response.data;
+};
