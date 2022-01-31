@@ -26,6 +26,26 @@ export interface IPatientData {
   doctorUser: string;
 }
 
+export interface IPrescriptionData {
+  medicine: string;
+  comment: string;
+  date: string;
+  uniquePrescriptionNumber: string;
+  firstName: string;
+  lastName: string;
+  doctorUser: string;
+}
+
+export interface IReferralData {
+  doctorType: string;
+  comment: string;
+  date: string;
+  uniqueReferralNumber: string;
+  firstName: string;
+  lastName: string;
+  doctorUser: string;
+}
+
 export const signIn = async (data: ISignInData) => {
   const response = await axios.get(`${baseUrl}/login`, {
     params: data,
@@ -44,6 +64,22 @@ export const signUp = async (data: ISignUpData) => {
 
 export const addPatient = async (data: IPatientData) => {
   const response = await axios.post(`${baseUrl}/patient/save`, null, {
+    params: data,
+  });
+
+  return response.data;
+};
+
+export const createPrescription = async (data: IPrescriptionData) => {
+  const response = await axios.post(`${baseUrl}/prescription/save`, null, {
+    params: data,
+  });
+
+  return response.data;
+};
+
+export const createReferral = async (data: IReferralData) => {
+  const response = await axios.post(`${baseUrl}/medicalReferral/save`, null, {
     params: data,
   });
 

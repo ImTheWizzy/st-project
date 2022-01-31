@@ -29,7 +29,7 @@ const Home = ({
         borderColor={'white'}
         borderRadius={'full'}
         onPress={() => {
-          navigation.navigate('SignUp');
+          navigation.navigate('CreatePrescription');
         }}>
         Create Prescription
       </Button>
@@ -40,7 +40,7 @@ const Home = ({
         borderColor={'white'}
         borderRadius={'full'}
         onPress={() => {
-          navigation.navigate('SignUp');
+          navigation.navigate('CreateReferral');
         }}>
         Create Medical Referral
       </Button>

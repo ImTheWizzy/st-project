@@ -44,6 +44,7 @@ const ViewPatients = ({
       background={'coolGray.900'}>
       {patients.map(patient => (
         <HStack
+          key={patient.id}
           alignItems={'center'}
           justifyContent={'space-between'}
           borderRadius="full"

@@ -12,6 +12,8 @@ import SignUp from './src/screens/SignUp';
 import {LogBox} from 'react-native';
 import AddPatient from './src/screens/AddPatient';
 import ViewPatients from './src/screens/ViewPatients';
+import CreatePrescription from './src/screens/CreatePrescription';
+import CreateReferral from './src/screens/CreateReferral';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -19,6 +21,8 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   AddPatient: undefined;
+  CreatePrescription: undefined;
+  CreateReferral: undefined;
   ViewPatients: undefined;
 };
 
@@ -71,6 +75,18 @@ const App = () => {
             name="AddPatient"
             component={AddPatient}
             options={{...headerOptions, title: 'Add Patient'}}
+          />
+
+          <Stack.Screen
+            name="CreatePrescription"
+            component={CreatePrescription}
+            options={{...headerOptions, title: 'Create Prescription'}}
+          />
+
+          <Stack.Screen
+            name="CreateReferral"
+            component={CreateReferral}
+            options={{...headerOptions, title: 'Create Referral'}}
           />
 
           <Stack.Screen
