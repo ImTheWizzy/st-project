@@ -55,9 +55,7 @@ export const signIn = async (data: ISignInData) => {
 };
 
 export const signUp = async (data: ISignUpData) => {
-  const response = await axios.post(`${baseUrl}/registration`, {
-    params: data,
-  });
+  const response = await axios.post(`${baseUrl}/registration`, data);
 
   return response.data;
 };

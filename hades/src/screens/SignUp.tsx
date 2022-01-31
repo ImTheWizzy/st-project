@@ -1,11 +1,27 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button, Heading, HStack, Input, Text, View, VStack} from 'native-base';
-import React from 'react';
+import React, {useState} from 'react';
 import {RootStackParamList} from '../../App';
+import {signUp} from '../api';
 
 const SignUp = ({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, 'Welcome'>) => {
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const handleSignUp = async () => {
+    try {
+      await signUp({firstName, lastName, username, password});
+
+      navigation.navigate('Welcome');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <VStack
       flex={1}
@@ -25,6 +41,8 @@ const SignUp = ({
         color={'lightText'}
         borderRadius={'full'}
         placeholder="First Name"
+        defaultValue={firstName}
+        onChangeText={input => setFirstName(input)}
       />
 
       <Input
@@ -34,6 +52,8 @@ const SignUp = ({
         color={'lightText'}
         borderRadius={'full'}
         placeholder="Last Name"
+        defaultValue={lastName}
+        onChangeText={input => setLastName(input)}
       />
 
       <Input
@@ -43,6 +63,8 @@ const SignUp = ({
         color={'lightText'}
         borderRadius={'full'}
         placeholder="Username"
+        defaultValue={username}
+        onChangeText={input => setUsername(input)}
       />
 
       <Input
@@ -53,14 +75,11 @@ const SignUp = ({
         borderRadius={'full'}
         placeholder="Password"
         type="password"
+        defaultValue={password}
+        onChangeText={input => setPassword(input)}
       />
 
-      <Button
-        width={'1/2'}
-        borderRadius={'full'}
-        onPress={() => {
-          navigation.navigate('Home');
-        }}>
+      <Button width={'1/2'} borderRadius={'full'} onPress={handleSignUp}>
         Register
       </Button>
     </VStack>

@@ -147,7 +147,7 @@ const AddPatient = ({
           onChangeText={input => setGender(input)}
         />
 
-        <Button width={'full'} borderRadius={'full'} onPress={handleAddPatient}>
+        <Button width={'1/2'} borderRadius={'full'} onPress={handleAddPatient}>
           Add Patient
         </Button>
       </VStack>

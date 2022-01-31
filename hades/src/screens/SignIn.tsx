@@ -15,9 +15,8 @@ const SignIn = ({
     try {
       const response = await signIn({username, password});
 
-      console.log(response);
-
       await AsyncStorage.setItem('user', response.userAuth);
+
       navigation.navigate('Home');
     } catch (error) {
       console.log(error);

@@ -150,7 +150,7 @@ const CreateReferral = ({
         />
 
         <Button
-          width={'full'}
+          width={'1/2'}
           borderRadius={'full'}
           onPress={handleCreateReferral}>
           Create Referral
