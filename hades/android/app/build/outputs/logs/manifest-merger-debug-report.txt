@@ -12,6 +12,7 @@ MERGED from [:react-native-community_async-storage] /home/martintodorov/workspac
 MERGED from [:react-native-safe-area-context] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-safe-area-context/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-screens] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-svg] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-svg/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-vector-icons] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.64.1] /home/martintodorov/.gradle/caches/transforms-2/files-2.1/8d2282471b47ce9a43adfd1155d78528/jetified-react-native-0.64.1/AndroidManifest.xml:2:1-13:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/martintodorov/.gradle/caches/transforms-2/files-2.1/5c64f35c4f864d4cd139ccbbff91ceb9/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [org.webkit:android-jsc:r245459] /home/martintodorov/.gradle/caches/transforms-2/files-2.1/65337ca8c0783fc27be60d476a5f6b75/jetified-android-jsc-r245459/AndroidManifest.xml:2:1-11:12
@@ -167,6 +168,8 @@ MERGED from [:react-native-screens] /home/martintodorov/workspace/university/st/
 MERGED from [:react-native-screens] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-svg] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-svg/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-svg] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-svg/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-vector-icons] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /home/martintodorov/workspace/university/st/st-project/hades/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.64.1] /home/martintodorov/.gradle/caches/transforms-2/files-2.1/8d2282471b47ce9a43adfd1155d78528/jetified-react-native-0.64.1/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.64.1] /home/martintodorov/.gradle/caches/transforms-2/files-2.1/8d2282471b47ce9a43adfd1155d78528/jetified-react-native-0.64.1/AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/martintodorov/.gradle/caches/transforms-2/files-2.1/5c64f35c4f864d4cd139ccbbff91ceb9/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44

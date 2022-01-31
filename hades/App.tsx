@@ -1,9 +1,10 @@
-import React from 'react';
-import {NativeBaseProvider} from 'native-base';
+import React, {useEffect, useState} from 'react';
+import {CloseIcon, NativeBaseProvider} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
+  NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import Welcome from './src/screens/Welcome';
 import Home from './src/screens/Home';
@@ -14,6 +15,7 @@ import AddPatient from './src/screens/AddPatient';
 import ViewPatients from './src/screens/ViewPatients';
 import CreatePrescription from './src/screens/CreatePrescription';
 import CreateReferral from './src/screens/CreateReferral';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -28,23 +30,46 @@ export type RootStackParamList = {
 
 LogBox.ignoreLogs(['NativeBase:']);
 
-const Stack = createNativeStackNavigator();
+const App = ({
+  navigation,
+}: NativeStackScreenProps<RootStackParamList, 'Home'>) => {
+  const Stack = createNativeStackNavigator();
+  // const [user, setUser] = useState<string>('');
 
-const headerOptions: NativeStackNavigationOptions = {
-  headerStyle: {
-    backgroundColor: '#06b6d4',
-  },
-  headerTintColor: '#FFFFFF',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-  },
-};
+  // const handleSignOut = async () => {
+  //   await AsyncStorage.removeItem('user');
+  //   navigation.navigate('Welcome');
+  // };
 
-const App = () => {
+  const headerOptions: NativeStackNavigationOptions = {
+    headerStyle: {
+      backgroundColor: '#06b6d4',
+    },
+    headerTintColor: '#FFFFFF',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    // headerRight: () => (
+    //   <CloseIcon size="4" color="white" onPress={handleSignOut} />
+    // ),
+  };
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const authenticatedUser = await AsyncStorage.getItem('user');
+  //     console.log(authenticatedUser);
+  //     authenticatedUser && setUser(authenticatedUser);
+  //   };
+
+  //   getUser();
+  // }, []);
+
   return (
     <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          {/* {!user ? ( */}
+          {/* <> */}
           <Stack.Screen
             name="Welcome"
             component={Welcome}
@@ -68,7 +93,9 @@ const App = () => {
               headerShown: false,
             }}
           />
-
+          {/* </> */}
+          {/* ) : ( */}
+          {/* <> */}
           <Stack.Screen name="Home" component={Home} options={headerOptions} />
 
           <Stack.Screen
@@ -94,6 +121,8 @@ const App = () => {
             component={ViewPatients}
             options={{...headerOptions, title: 'View Patients'}}
           />
+          {/* </> */}
+          {/* )} */}
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
